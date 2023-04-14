@@ -13,7 +13,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 @Configuration
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
-
+    
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf()
@@ -30,7 +30,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .logout()
                 .logoutSuccessUrl("https://" + System.getenv("SUBDOMAIN") + ".auth." + System.getenv("AWS_REGION") +
                         ".amazoncognito.com/logout?client_id=" + System.getenv("COGNITO_CLIENT_ID") +
-                        "&logout_uri=http://localhost:8080/")
+                        "&logout_uri=http://localhost:8080")
         ;
     }
 }
