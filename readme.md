@@ -54,7 +54,7 @@ Find additional troubleshooting and configuration information in the included TT
 ![image](images/222_ISS.png)
 
 #### Timeline:
-Fall of 2023: the following enhancements are planned:
-    - Two-factor authentication with authenticator apps and SMS messaging.
-    - Improvments to UI with a focus on use on mobile devices
-    - Integration with third-party calendar applications such as Microsoft Teams, iCal, and Outlook, enabling syncing of scheduled drills and events.
+In the Fall of 2023, the following enhancements are planned:
+- Two-factor authentication with authenticator apps and SMS messaging.
+- Improvements to UI with a focus on use on mobile devices.
+- Integration with third-party calendar applications such as Microsoft Teams, iCal, and Outlook, enabling syncing of scheduled drills and events.
