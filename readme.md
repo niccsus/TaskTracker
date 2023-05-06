@@ -12,7 +12,7 @@
 *   Andrew Xiong: andrewxiong@csus.edu
 
 #### Synopsis:
-Task Tracker 222 is a platform designed to do exactly what it sounds like: track tasks. Users can easily view scheduled tasks/drills along with time, location, and other important details, making it a breeze to keep track of everything. Administrators can create, edit, and delete drills with ease, approve or deny new accounts, and edit or delete existing accounts as necessary.
+Task Tracker 222 is a platform designed to do exactly what it sounds like: track tasks. Users can easily view scheduled tasks/drills along with time, location, and other important details. Administrators can create, edit, and delete drills with ease, approve or deny new accounts, and edit or delete existing accounts as necessary.
 
 To ensure the security of the app and its users, Task Tracker 222 implements Amazon Web Service Cognito and RDS. This means that data is stored securely and personal information is protected.
 
