@@ -12,7 +12,7 @@
 *   Andrew Xiong: andrewxiong@csus.edu
 
 #### Synopsis:
-Welcome to Task Tracker 222. This app is designed to provide participants in the Air National Guard with an easy-to-use platform to view their scheduled drills that show time and location clearly and conveniently. Administrators can create, edit, and delete drills with ease. Additionally, administrators can approve and deny new accounts, edit existing accounts, and delete them as necessary.
+Task Tracker 222 is a platform designed to do exactly what it sounds like: track tasks. Users can easily view scheduled tasks/drills along with time, location, and other important details, making it a breeze to keep track of everything. Administrators can create, edit, and delete drills with ease, approve or deny new accounts, and edit or delete existing accounts as necessary.
 
 To ensure the security of the app and its users, Task Tracker 222 implements Amazon Web Service Cognito and RDS. This means that data is stored securely and personal information is protected.
 
@@ -23,18 +23,42 @@ To ensure the security of the app and its users, Task Tracker 222 implements Ama
 
 #### Deployment:
 - To run this app, ensure that there are active instances of Amazon Cognito, ISW, and a PostgreSQL RDS set up. Collect the following variables and add them to the Task Tracker environment variables:
-    - ACCESS_KEY: IAM -> Users -> Security Credentials
-    - AWS_REGION: Cognito -> General Settings
-    - CLIENT_SECRET: Cognito -> App Clients -> Show Details
-    - COGNITO_CLIENT_ID: Cognito -> App Clients -> Show Details
-    - COGNITO_CLIENT_NAME: Cognito -> App Clients -> Show Details
-    - COGNITO_ISSUER_URI: The endpoint from the DATABASE_URL below and the Cognito pool ID in this format: https://{endpoint}/{pool-id}
-    - DATABASE_PASSWORD: RDS -> Database Name -> Modify -> New Master Password
-    - DATABASE_URL: Follow this format: jdbc:postgresql://{Endpoint}:{PortNumber}/{DB name}, where Endpoint and Port Number can be found in RDS -> Database -> Connectivity & Security. For example: jdbc:postgresql://tasktracker.ciw3zlwjelrb.us-west-1.rds.amazonaws.com:5432/TaskTracker.
-    - DATABASE_USERNAME
-    - SECRET_KEY
-    - SUBDOMAIN
-    - USER_POOL_ID: RDS -> Database -> Database Name -> Configuration.
+
+**ACCESS_KEY:**  
+IAM -> Users -> Security Credentials
+
+**AWS_REGION:**  
+Cognito -> General Settings
+
+**CLIENT_SECRET:**  
+Cognito -> App Clients -> Show Details
+
+**COGNITO_CLIENT_ID:**  
+Cognito -> App Clients -> Show Details
+
+**COGNITO_CLIENT_NAME:**  
+Cognito -> App Clients -> Show Details
+
+**COGNITO_ISSUER_URI:**  
+The endpoint from the **DATABASE_URL** below and the Cognito pool ID in this format: https://{endpoint}/{pool-id}
+
+**DATABASE_PASSWORD:**  
+RDS -> Database Name -> Modify -> New Master Password
+
+**DATABASE_URL:**  
+Follow this format: `jdbc:postgresql://{Endpoint}:{PortNumber}/{DB name}`, where Endpoint and Port Number can be found in `RDS -> Database -> Connectivity & Security`. For example: `jdbc:postgresql://tasktracker.ciw3zlwjelrb.us-west-1.rds.amazonaws.com:5432/TaskTracker`.
+
+**DATABASE_USERNAME:**
+    
+**SECRET_KEY:**
+    
+**SUBDOMAIN:**
+    
+**USER_POOL_ID:**  
+RDS -> Database -> Database Name -> Configuration.
+
+
+
 
 Additional instructions for deployment can be found in the TT222_User_Manual.pdf.
 
