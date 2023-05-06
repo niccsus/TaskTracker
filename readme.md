@@ -51,10 +51,10 @@ Find additional troubleshooting and configuration information in the included TT
 
 #### Logo of the 222nd Intelligence Squadron:
 
-![image](images/222nd_Intelligence_Squadron_logo.png)
+![image](images/222_ISS.png)
 
 #### Timeline:
-In the Fall of 2023, the following enhancements are planned:
-- Two-factor authentication via authenticator apps and SMS messaging.
-- Additional UI enhancements for mobile use.
-- Integration with Microsoft Teams/third-party calendars like iCal and Outlook.
+Fall of 2023: the following enhancements are planned:
+    - Two-factor authentication with authenticator apps and SMS messaging.
+    - Improvments to UI with a focus on use on mobile devices
+    - Integration with third-party calendar applications such as Microsoft Teams, iCal, and Outlook, enabling syncing of scheduled drills and events.
