@@ -18,10 +18,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf()
                 .disable()
-                .authorizeRequests() //users request need to be authorized, such as access token or refresh token
-                .anyRequest() //all requests that sent by users
-                .authenticated() //need to be authenticated, such as signIN
-                .and()
+                .authorizeRequests(auth -> auth.mvcMatchers("/") //users request need to be authorized, such as access token or refresh token
+                    .permitAll()
+                    .anyRequest() //all requests that sent by users
+                    .authenticated()) //need to be authenticated, such as signIN
                 .oauth2Login() //this use an oauth2login process that we can use MFA(multiple factors authentication)
                 //which we can allow second authentication, such as send a text to a user to verify their signIN process,
                 //but in our case we do not implement it yet.
