@@ -214,7 +214,7 @@ public class UserController {
 
         try {
             List<String> userInfoList = poolClientInterface.getUserInfo(principal.getName());
-            String email = userInfoList.get(2);
+            String email = userInfoList.get(2); //previously 3
             if (!usersDaoService.hasUserData(email)) {
                 usersDaoService.registerUserToDatabase(
                         principal.getName(),

@@ -8,7 +8,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
  * Adding controllers for MFA when it is implemented
 */
 
-
+/*
 @Configuration
 public class CognitoConfiguration implements WebMvcConfigurer{
 
@@ -17,3 +17,4 @@ public class CognitoConfiguration implements WebMvcConfigurer{
         registry.addViewController("/").setViewName("home");
 }
 }
+*/
