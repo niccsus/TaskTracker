@@ -13,14 +13,16 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 @Configuration
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
-    
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf()
                 .disable()
-                .authorizeRequests() //users request need to be authorized, such as access token or refresh token
-                .anyRequest() //all requests that sent by users
-                .authenticated() //need to be authenticated, such as signIN
+                .authorizeRequests(auth -> auth.mvcMatchers("/") //users request need to be authorized, such as access token or refresh token
+                        .permitAll()
+                        .anyRequest() //all requests that sent by users
+                        .authenticated()) //need to be authenticated, such as signIN
+                .oauth2Client() //added for Oauth2 error, still have invalid client issue
                 .and()
                 .oauth2Login() //this use an oauth2login process that we can use MFA(multiple factors authentication)
                 //which we can allow second authentication, such as send a text to a user to verify their signIN process,
