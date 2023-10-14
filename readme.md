@@ -3,7 +3,7 @@
 
 ## Team Members:
 *   Thomas Jaramillo-Ochoa: thomasjaramillo@csus.edu
-*   Ian Shultz: irshultz@csus.edu
+*   Ian Schultz: irschultz@csus.edu
 *   Soua Chang: schang@csus.edu
 *   Nicholas Burt: nburt@csus.edu
 *   Christopher Gonsalves: cgonsalves2@csus.edu
