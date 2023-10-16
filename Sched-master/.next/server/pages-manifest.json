@@ -3,8 +3,12 @@
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
 <<<<<<< HEAD
+<<<<<<< HEAD
   "/testcalendar": "pages/testcalendar.js",
 =======
 >>>>>>> 5202cba (test)
+=======
+  "/UserProfile": "pages/UserProfile.js",
+>>>>>>> 98fa39e (test)
   "/": "pages/index.js"
 }

@@ -166,6 +166,7 @@
 /******/ 	!function() {
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 /******/ 		__webpack_require__.h = function() { return "3f364e2bb6087c50"; }
 =======
 /******/ 		__webpack_require__.h = function() { return "b3b237bf5908fbd5"; }
@@ -173,6 +174,9 @@
 =======
 /******/ 		__webpack_require__.h = function() { return "3f50b942402b06a4"; }
 >>>>>>> 2542896 (test)
+=======
+/******/ 		__webpack_require__.h = function() { return "4c8e3a2edd213111"; }
+>>>>>>> 98fa39e (test)
 /******/ 	}();
 /******/ 	
 /******/ 	/* webpack/runtime/global */
