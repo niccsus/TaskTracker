@@ -4,11 +4,14 @@
   "/_document": "pages/_document.js",
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
   "/testcalendar": "pages/testcalendar.js",
 =======
 >>>>>>> 5202cba (test)
 =======
   "/UserProfile": "pages/UserProfile.js",
 >>>>>>> 98fa39e (test)
+=======
+>>>>>>> 33169e3 (test)
   "/": "pages/index.js"
 }
