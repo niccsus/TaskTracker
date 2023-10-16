@@ -165,10 +165,14 @@
 /******/ 	/* webpack/runtime/getFullHash */
 /******/ 	!function() {
 <<<<<<< HEAD
+<<<<<<< HEAD
 /******/ 		__webpack_require__.h = function() { return "3f364e2bb6087c50"; }
 =======
 /******/ 		__webpack_require__.h = function() { return "b3b237bf5908fbd5"; }
 >>>>>>> 5202cba (test)
+=======
+/******/ 		__webpack_require__.h = function() { return "3f50b942402b06a4"; }
+>>>>>>> 2542896 (test)
 /******/ 	}();
 /******/ 	
 /******/ 	/* webpack/runtime/global */
