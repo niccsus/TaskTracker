@@ -44,6 +44,7 @@
 /******/ 	__webpack_require__.m = __webpack_modules__;
 /******/ 	
 /************************************************************************/
+<<<<<<< HEAD
 /******/ 	/* webpack/runtime/async module */
 /******/ 	(() => {
 /******/ 		var webpackQueues = typeof Symbol === "function" ? Symbol("webpack queues") : "__webpack_queues__";
@@ -113,6 +114,8 @@
 /******/ 		};
 /******/ 	})();
 /******/ 	
+=======
+>>>>>>> 5202cba (test)
 /******/ 	/* webpack/runtime/compat get default export */
 /******/ 	(() => {
 /******/ 		// getDefaultExport function for compatibility with non-harmony modules
@@ -125,6 +128,7 @@
 /******/ 		};
 /******/ 	})();
 /******/ 	
+<<<<<<< HEAD
 /******/ 	/* webpack/runtime/create fake namespace object */
 /******/ 	(() => {
 /******/ 		var getProto = Object.getPrototypeOf ? (obj) => (Object.getPrototypeOf(obj)) : (obj) => (obj.__proto__);
@@ -155,6 +159,8 @@
 /******/ 		};
 /******/ 	})();
 /******/ 	
+=======
+>>>>>>> 5202cba (test)
 /******/ 	/* webpack/runtime/define property getters */
 /******/ 	(() => {
 /******/ 		// define getter functions for harmony exports

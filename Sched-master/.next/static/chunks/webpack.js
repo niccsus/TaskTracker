@@ -103,6 +103,7 @@
 /******/ 		};
 /******/ 	}();
 /******/ 	
+<<<<<<< HEAD
 /******/ 	/* webpack/runtime/create fake namespace object */
 /******/ 	!function() {
 /******/ 		var getProto = Object.getPrototypeOf ? function(obj) { return Object.getPrototypeOf(obj); } : function(obj) { return obj.__proto__; };
@@ -133,6 +134,8 @@
 /******/ 		};
 /******/ 	}();
 /******/ 	
+=======
+>>>>>>> 5202cba (test)
 /******/ 	/* webpack/runtime/define property getters */
 /******/ 	!function() {
 /******/ 		// define getter functions for harmony exports
@@ -161,7 +164,11 @@
 /******/ 	
 /******/ 	/* webpack/runtime/getFullHash */
 /******/ 	!function() {
+<<<<<<< HEAD
 /******/ 		__webpack_require__.h = function() { return "3f364e2bb6087c50"; }
+=======
+/******/ 		__webpack_require__.h = function() { return "b3b237bf5908fbd5"; }
+>>>>>>> 5202cba (test)
 /******/ 	}();
 /******/ 	
 /******/ 	/* webpack/runtime/global */
