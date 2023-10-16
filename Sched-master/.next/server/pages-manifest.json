@@ -5,6 +5,7 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
   "/testcalendar": "pages/testcalendar.js",
 =======
 >>>>>>> 5202cba (test)
@@ -13,5 +14,8 @@
 >>>>>>> 98fa39e (test)
 =======
 >>>>>>> 33169e3 (test)
+=======
+  "/UserProfile": "pages/UserProfile.js",
+>>>>>>> bf295e8 (test)
   "/": "pages/index.js"
 }
