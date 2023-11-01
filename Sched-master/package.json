@@ -7,12 +7,21 @@
   },
   "dependencies": {
 <<<<<<< HEAD
+<<<<<<< HEAD
     "@headlessui/react": "^1.7.17",
     "@heroicons/react": "^2.0.18",
     "next": "^13.5.6",
 =======
     "next": "^13.5.4",
 >>>>>>> 5202cba (test)
+=======
+    "next": "^13.5.4",
+=======
+    "@headlessui/react": "^1.7.17",
+    "@heroicons/react": "^2.0.18",
+    "next": "^13.5.6",
+>>>>>>> 71fd90a (Event scheduling)
+>>>>>>> e79ae06 (Event scheduling)
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-icons": "^4.11.0"
@@ -22,12 +31,21 @@
   },
   "devDependencies": {
 <<<<<<< HEAD
+<<<<<<< HEAD
     "@types/node": "20.8.9",
     "@types/react": "18.2.33",
 =======
     "@types/node": "20.8.6",
     "@types/react": "18.2.28",
 >>>>>>> 5202cba (test)
+=======
+    "@types/node": "20.8.6",
+    "@types/react": "18.2.28",
+=======
+    "@types/node": "20.8.9",
+    "@types/react": "18.2.33",
+>>>>>>> 71fd90a (Event scheduling)
+>>>>>>> e79ae06 (Event scheduling)
     "typescript": "5.2.2"
   }
 }

@@ -17,11 +17,14 @@
       "static/chunks/main.js",
       "static/chunks/pages/index.js"
     ],
+<<<<<<< HEAD
     "/UserProfile": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
       "static/chunks/pages/UserProfile.js"
     ],
+=======
+>>>>>>> 71fd90a (Event scheduling)
     "/_app": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
@@ -32,13 +35,21 @@
       "static/chunks/main.js",
       "static/chunks/pages/_error.js"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> e79ae06 (Event scheduling)
     ],
     "/testcalendar": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
       "static/chunks/pages/testcalendar.js"
+<<<<<<< HEAD
 =======
 >>>>>>> 5202cba (test)
+=======
+>>>>>>> 71fd90a (Event scheduling)
+>>>>>>> e79ae06 (Event scheduling)
     ]
   },
   "ampFirstPages": []
