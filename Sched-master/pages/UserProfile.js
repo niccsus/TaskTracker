@@ -1,348 +1,320 @@
-import React, { useEffect, useState } from 'react';
-import "../components/user-management";
+import React, { useState, useEffect } from 'react';
+import { useForm } from 'react-hook-form';
+import axios from 'axios';
 
+function UserProfile() {
+    const { register, handleSubmit, formState: { errors } } = useForm();
+    const [users, setUsers] = useState([]);
+    const [selectedUser, setSelectedUser] = useState(null);
 
+    const handleEdit = (userId) => {
+        // Fetch user data for editing
+        axios.get(`/api/users/${userId}`)
+            .then(response => {
+                const userData = response.data;
+                setSelectedUser(userData);
+                // Update the form fields with the user data for editing
+                // Implement logic to open an edit form with user data
+            })
+            .catch(error => {
+                console.error(error);
+                // Handle the error appropriately
+            });
+    };
 
+    const handleDelete = (userId) => {
+        // You can add a confirmation dialog here to confirm user deletion
+        if (window.confirm("Are you sure you want to delete this user?")) {
+            // Send an HTTP request to delete the user with the specified userId
+            axios
+                .delete(`/api/users/${userId}`)
+                .then((response) => {
+                    console.log(response.data);
+                    // Handle success or update the users state to reflect the deletion
+                })
+                .catch((error) => {
+                    console.error(error);
+                    // Handle the error appropriately
+                });
+        }
+    };
 
-function UserProfile({ users = [] }) {
-    const [firstName, setFirstName] = useState('');
-    const [lastName, setLastName] = useState('');
-    const [militaryEmail, setMilitaryEmail] = useState('');
-    const [civilianEmail, setCivilianEmail] = useState('');
-    const [phoneNumber, setPhoneNumber] = useState('');
-    const [officeNumber, setOfficeNumber] = useState('');
-    const [rank, setRank] = useState("");
-    const [flight, setFlight] = useState("");
-    const [workCenter, setWorkCenter] = useState("");
-    const [admin, setAdmin] = useState("");
-    const [teams, setTeams] = useState([]);
-    const [id, setId] = useState("");
-    const [ranks, setRanks] = useState([]);
-    const [flights, setFlights] = useState([]);
-    const [workcenters, setWorkCenters] = useState([]);
+    const onSubmit = (data) => {
+        if (selectedUser) {
+            // Send a PUT request to update an existing user
+            axios.put(`/api/users/${selectedUser.id}`, data)
+                .then(response => {
+                    console.log(response.data);
+                    // Handle success or update the users state
+                    setSelectedUser(null); // Clear the selected user after editing
+                })
+                .catch(error => {
+                    console.error(error);
+                    // Handle the error appropriately
+                });
+        } else {
+            // If selectedUser is null, it means you are creating a new user
+            // Send a POST request to create a new user
+            axios.post('/user-manager', {
+                id: null, // You might not need to include the ID if it's auto-generated
+                firstName: data["First name"],
+                lastName: data["Last name"],
+                militaryEmail: data["Mil Email"],
+                civilianEmail: data["Civ Email"],
+                phoneNumber: data["Personal Phone"],
+                officeNumber: data["Office Phone"],
+                rank: data["Rank"],
+                flight: data["Flight"],
+                workCenter: data["Workcenter"],
+                teams: [data["Teams"]],
+                admin: data["Admin"] === "True", // Assuming "Admin" can be either "True" or "False"
+            })
+                .then(response => {
+                    console.log(response.data);
+                    // You can update the users state or show a success message
+                })
+                .catch(error => {
+                    console.error(error);
+                    // Handle the error appropriately
+                });
+        }
+    };
 
     useEffect(() => {
-        const selectFieldCss = {
-            width: "100%",
-            fontSize: "1.5vh",
-            borderRadius: "2px",
-            verticalAlign: "center",
-        };
-
-
-        const rankSelect = document.getElementById("input-rank");
-        if (rankSelect) {
-            rankSelect.setAttribute("data-placeholder", "Rank");
-            const rankChosen = document.getElementById("input_rank_chosen");
-            if (rankChosen) {
-                rankChosen.style.width = selectFieldCss.width;
-                rankChosen.style.fontSize = selectFieldCss.fontSize;
-                rankChosen.style.borderRadius = selectFieldCss.borderRadius;
-                rankChosen.style.verticalAlign = selectFieldCss.verticalAlign;
-
-            }
-        }
-
-        const flightSelect = document.getElementById("input-flight");
-        if (flightSelect) {
-            flightSelect.setAttribute("data-placeholder", "Flight");
-            const flightChosen = document.getElementById("input_flight_chosen");
-            if (flightChosen) {
-                flightChosen.style.width = selectFieldCss.width;
-                flightChosen.style.fontSize = selectFieldCss.fontSize;
-                flightChosen.style.borderRadius = selectFieldCss.borderRadius;
-                flightChosen.style.verticalAlign = selectFieldCss.verticalAlign;
-
-            }
-        }
-
-        const workcenterSelect = document.getElementById("input-workcenter");
-        if (workcenterSelect) {
-            workcenterSelect.setAttribute("data-placeholder", "Workcenter");
-            const workcenterChosen = document.getElementById("input_workcenter_chosen");
-            if (workcenterChosen) {
-                workcenterChosen.style.width = selectFieldCss.width;
-                workcenterChosen.style.fontSize = selectFieldCss.fontSize;
-                workcenterChosen.style.borderRadius = selectFieldCss.borderRadius;
-                workcenterChosen.style.verticalAlign = selectFieldCss.verticalAlign;
-
-            }
-        }
-
-        const teamsSelect = document.getElementById("input-teams");
-        if (teamsSelect) {
-            teamsSelect.setAttribute("data-placeholder", "Teams");
-            const teamsChosen = document.getElementById("input_teams_chosen");
-            if (teamsChosen) {
-                teamsChosen.style.width = selectFieldCss.width;
-                teamsChosen.style.fontSize = selectFieldCss.fontSize;
-                teamsChosen.style.borderRadius = selectFieldCss.borderRadius;
-                teamsChosen.style.verticalAlign = selectFieldCss.verticalAlign;
-
-            }
-        }
-
-        const adminSelect = document.getElementById("input-admin");
-        if (adminSelect) {
-            adminSelect.setAttribute("data-placeholder", "Admin");
-            const adminChosen = document.getElementById("input_admin_chosen");
-            if (adminChosen) {
-                adminChosen.style.width = selectFieldCss.width;
-                adminChosen.style.fontSize = selectFieldCss.fontSize;
-                adminChosen.style.borderRadius = selectFieldCss.borderRadius;
-                adminChosen.style.verticalAlign = selectFieldCss.verticalAlign;
-
-            }
-        }
+        // Fetch and display user data from the server
+        axios.get('/api/users')
+            .then(response => {
+                setUsers(response.data);
+            })
+            .catch(error => {
+                console.error(error);
+                // Handle the error appropriately
+            });
     }, []);
+
     return (
-        <div className="userProfile">
-            <h1>Profile</h1>
-            <main className="user-management-main">
-                <div class="left user-table-div">
-                    <div class="top-left">
-                        <h1>User List</h1>
-                    </div>
-                    <div class="bottom-left">
+        <div>
+            <form onSubmit={handleSubmit(onSubmit)}>
+                <input type="text" placeholder="First name" {...register("First name", {required: true, maxLength: 80})} />
+                <input type="text" placeholder="Last name" {...register("Last name", {required: true, maxLength: 100})} />
+                <input type="text" placeholder="Mil Email" {...register("Mil Email", {required: true})} />
+                <input type="text" placeholder="Civ Email" {...register} />
+                <input type="tel" placeholder="Personal Phone" {...register("Personal Phone", {required: true})} />
+                <input type="tel" placeholder="Office Phone" {...register("Office Phone", {required: true})} />
+                <select {...register("Rank", { required: true })}>
+                    <option value="AB">AB</option>
+                    <option value="Amn">Amn</option>
+                    <option value="A1C">A1C</option>
+                    <option value="SrA">SrA</option>
+                    <option value="SSgt">SSgt</option>
+                    <option value="TSgt">TSgt</option>
+                    <option value="MSgt">MSgt</option>
+                    <option value="SMSgt">SMSgt</option>
+                    <option value="CMSgt">CMSgt</option>
+                    <option value="CCM">CCM</option>
+                    <option value="CMSAF">CMSAF</option>
+                    <option value="2nd Lt">2nd Lt</option>
+                    <option value="1st Lt">1st Lt</option>
+                    <option value="Capt">Capt</option>
+                    <option value="Maj">Maj</option>
+                    <option value="Lt Col">Lt Col</option>
+                    <option value="Col">Col</option>
+                    <option value="Brig Gen">Brig Gen</option>
+                    <option value="Maj Gen">Maj Gen</option>
+                    <option value="Lt Gen">Lt Gen</option>
+                    <option value="Gen">Gen</option>
+                    <option value="GOAF">GOAF</option>
+                </select>
+                <select {...register("Flight", { required: true })}>
+                    <option value="CMD">CMD</option>
+                    <option value="SCO1">SCO1</option>
+                    <option value="SCO2">SCO2</option>
+                    <option value="SCP">SCP</option>
+                </select>
+                <select {...register("Workcenter", { required: true })}>
+                    <option value="SCOP">SCOP</option>
+                    <option value="SCOS">SCOS</option>
+                    <option value="SCOX">SCOX</option>
+                    <option value="SCOI">SCOI</option>
+                    <option value="SCOT">SCOT</option>
+                </select>
+                <select {...register("Teams", { required: true })}>
+                    <option value="222ALL">222ALL</option>
+                    <option value="PTL">PTL</option>
+                    <option value="Training">Training</option>
+                    <option value="Booster">Booster</option>
+                    <option value="Top3">Top3</option>
+                    <option value="Rising6">Rising6</option>
+                    <option value="Flt Leadership">Flt Leadership</option>
+                    <option value="DOMOPS">DOMOPS</option>
+                    <option value="Viewer">Viewer</option>
+                </select>
+                <select {...register("Admin")}>
+                    <option value="True">True</option>
+                    <option value="False">False</option>
+                </select>
+            </form>
 
-                        <table class="user-table">
-                            <thead class="user-table-header">
-                            <tr>
-                                <th class="user-table-header-entry">Name</th>
-                                <th class="user-table-header-entry">Rank</th>
-                                <th class="user-table-header-entry">Workcenter</th>
-                                <th class="user-table-header-entry">Flight</th>
-                            </tr>
-                            </thead>
+            <input type="submit" />
+            {selectedUser && (
+                <form onSubmit={handleSubmit(onSubmit)}>
+                    <input
+                        type="text"
+                        placeholder="First name"
+                        {...register("firstName", { required: true, maxLength: 80 })}
+                        defaultValue={selectedUser.firstName} // Pre-fill user data
+                    />
 
-                            <tbody>
-                            {users.map((user) => (
-                                <tr
-                                    onClick={() => updateSelectedUser(user.id)}
-                                    className="user-table-row"
-                                    key={`user-list-row-${user.id}`}
-                                >
-                                    <td className="user-table-entry">
-                                        {user.approved ? `${user.firstName} ${user.lastName}` : `[PENDING] ${user.firstName} ${user.lastName}`}
-                                    </td>
-                                    <td className="user-table-entry">{user.rank}</td>
-                                    <td className="user-table-entry">{user.workCenter}</td>
-                                    <td className="user-table-entry">{user.flight}</td>
-                                </tr>
-                            ))}
-                            </tbody>
-                        </table>
-                    </div>
+                    <input
+                        type="text"
+                        placeholder="Last name"
+                        {...register("lastName", { required: true, maxLength: 100 })}
+                        defaultValue={selectedUser.lastName}
+                    />
 
+                    <input
+                        type="text"
+                        placeholder="Mil Email"
+                        {...register("militaryEmail", { required: true })}
+                        defaultValue={selectedUser.militaryEmail}
+                    />
 
+                    <input
+                        type="text"
+                        placeholder="Civ Email"
+                        {...register("civilianEmail")}
+                        defaultValue={selectedUser.civilianEmail}
+                    />
 
-                    <div class="right">
-                        <div class="top-right">
-                            <h1>User Editor</h1>
-                        </div>
-                        <div class="bottom-right user-editor-div">
-                            <div class="user-management-editor-div">
+                    <input
+                        type="tel"
+                        placeholder="Personal Phone"
+                        {...register("phoneNumber", { required: true })}
+                        defaultValue={selectedUser.phoneNumber}
+                    />
 
-                                <form className="user-management-table-form" autoComplete="off" action="/user-manager" method="post">
-                                    <table class="user-management-table">
-                                        <tr>
-                                            <th class="user-management-entry">First Name</th>
-                                            <td class="user-management-value-cell">
-                                                <input
-                                                    id="input-first_name"
-                                                    className="user-management-value"
-                                                    type="text"
-                                                    value={firstName}
-                                                    onChange={(e) => setFirstName(e.target.value)}
-                                                />
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <th class="user-management-entry">Last Name</th>
-                                            <td class="user-management-value-cell">
-                                                <input
-                                                    id="input-last_name"
-                                                    className="user-management-value"
-                                                    type="text"
-                                                    value={lastName}
-                                                    onChange={(e) => setLastName(e.target.value)}
-                                                    required
-                                                />
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <th class="user-management-entry">Mil Email</th>
-                                            <td class="user-management-value-cell">
-                                                <input
-                                                    id="input-mil_email"
-                                                    className="user-management-value"
-                                                    type="email"
-                                                    value={militaryEmail}
-                                                    onChange={(e) => setMilitaryEmail(e.target.value)}
-                                                    required
-                                                />
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <th class="user-management-entry">Civ Email</th>
-                                            <td class="user-management-value-cell">
-                                                <input
-                                                    id="input-civ_email"
-                                                    className="user-management-value"
-                                                    type="email"
-                                                    value={civilianEmail}
-                                                    onChange={(e) => setCivilianEmail(e.target.value)}
-                                                    required
-                                                />
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <th class="user-management-entry">Personal Phone</th>
-                                            <td class="user-management-value-cell">
-                                                <input
-                                                    id="input-personal_phone"
-                                                    className="user-management-value"
-                                                    type="text"
-                                                    value={phoneNumber}
-                                                    onChange={(e) => setPhoneNumber(e.target.value)}
-                                                />
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <th class="user-management-entry">Office Phone</th>
-                                            <td class="user-management-value-cell">
-                                                <input
-                                                    id="input-office_phone"
-                                                    className="user-management-value"
-                                                    type="text"
-                                                    value={officeNumber}
-                                                    onChange={(e) => setOfficeNumber(e.target.value)}
-                                                />
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <th class="user-management-entry">Rank</th>
-                                            <td class="user-management-value-cell">
-                                                <select
-                                                    id="input-rank"
-                                                    value={rank}
-                                                    onChange={(e) => setRank(e.target.value)}
-                                                >
-                                                    <option value="">No Rank Selected</option>
-                                                    {ranks.map((rankOption) => (
-                                                        <option key={rankOption} value={rankOption}>
-                                                            {rankOption}
-                                                        </option>
-                                                    ))}
-                                                </select>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <th class="user-management-entry">Flight</th>
-                                            <td class="user-management-value-cell">
-                                                <select
-                                                    id="input-flight"
-                                                    value={flight}
-                                                    onChange={(e) => setFlight(e.target.value)}
-                                                >
-                                                    <option value="">No Flight Selected</option>
-                                                    {flights.map((flightOption) => (
-                                                        <option key={flightOption} value={flightOption}>
-                                                            {flightOption}
-                                                        </option>
-                                                    ))}
-                                                </select>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <th class="user-management-entry">Workcenter</th>
-                                            <td class="user-management-value-cell">
-                                                <select
-                                                    id="input-workcenter"
-                                                    value={workCenter}
-                                                    onChange={(e) => setWorkCenter(e.target.value)}
-                                                >
-                                                    <option value="">No Workcenter Selected</option>
-                                                    {workcenters.map((workcenterOption) => (
-                                                        <option key={workcenterOption} value={workcenterOption}>
-                                                            {workcenterOption}
-                                                        </option>
-                                                    ))}
-                                                </select>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <th class="user-management-entry">Teams</th>
-                                            <td class="user-management-value-cell">
-                                                <select
-                                                    multiple
-                                                    id="input-teams"
-                                                    value={teams}
-                                                    onChange={(e) => setTeams(Array.from(e.target.selectedOptions, (option) => option.value))}
-                                                >
-                                                    {teams.map((teamOption) => (
-                                                        <option key={teamOption} value={teamOption}>
-                                                            {teamOption}
-                                                        </option>
-                                                    ))}
-                                                </select>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <th class="user-management-entry">Admin</th>
-                                            <td class="user-management-value-cell">
-                                                <select
-                                                    id="input-admin"
-                                                    value={admin}
-                                                    onChange={(e) => setAdmin(e.target.value === "true")}
-                                                >
-                                                    <option value="true">True</option>
-                                                    <option value="false">False</option>
-                                                </select>
-                                            </td>
-                                        </tr>
+                    <input
+                        type="tel"
+                        placeholder="Office Phone"
+                        {...register("officeNumber", { required: true })}
+                        defaultValue={selectedUser.officeNumber}
+                    />
 
-                                        <tr>
-                                            <input
-                                                id="input-id"
-                                                type="hidden"
-                                                value={id}
-                                            />
-                                        </tr>
-                                    </table>
+                    <select {...register("rank", { required: true })} defaultValue={selectedUser.rank}>
+                        <option value="">Select Rank</option> {/* Placeholder */}
+                        <option value="AB">AB</option>
+                        <option value="Amn">Amn</option>
+                        <option value="A1C">A1C</option>
+                        <option value="SrA">SrA</option>
+                        <option value="SSgt">SSgt</option>
+                        <option value="TSgt">TSgt</option>
+                        <option value="MSgt">MSgt</option>
+                        <option value="SMSgt">SMSgt</option>
+                        <option value="CMSgt">CMSgt</option>
+                        <option value="CCM">CCM</option>
+                        <option value="CMSAF">CMSAF</option>
+                        <option value="2nd Lt">2nd Lt</option>
+                        <option value="1st Lt">1st Lt</option>
+                        <option value="Capt">Capt</option>
+                        <option value="Maj">Maj</option>
+                        <option value="Lt Col">Lt Col</option>
+                        <option value="Col">Col</option>
+                        <option value="Brig Gen">Brig Gen</option>
+                        <option value="Maj Gen">Maj Gen</option>
+                        <option value="Lt Gen">Lt Gen</option>
+                        <option value="Gen">Gen</option>
+                        <option value="GOAF">GOAF</option>
+                    </select>
 
-                                    <div class="user-edit-button-div">
-                                        <button
-                                            id="user-submit-button"
-                                            className="user-edit-submit"
-                                            type="submit"
-                                            name="submit"
-                                            onClick={changeToUserSubmit()}
-                                        >
-                                            Submit
-                                        </button>
-                                        <button
-                                            id="user-delete-button"
-                                            className="user-edit-submit user-edit-delete"
-                                            type="submit"
-                                            name="delete"
-                                            onClick={changeToUserDelete()}
-                                        >
-                                            Delete
-                                        </button>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                    <select {...register("flight", { required: true })} defaultValue={selectedUser.flight}>
+                        <option value="">Select Flight</option> {/* Placeholder */}
+                        <option value="CMD">CMD</option>
+                        <option value="SCO1">SCO1</option>
+                        <option value="SCO2">SCO2</option>
+                        <option value="SCP">SCP</option>
+                        {/* Add more flight options here */}
+                    </select>
+
+                    <select {...register("workCenter", { required: true })} defaultValue={selectedUser.workCenter}>
+                        <option value="">Select Work Center</option> {/* Placeholder */}
+                        <option value="SCOP">SCOP</option>
+                        <option value="SCOS">SCOS</option>
+                        <option value="SCOX">SCOX</option>
+                        <option value="SCOI">SCOI</option>
+                        <option value="SCOT">SCOT</option>
+                        {/* Add more work center options here */}
+                    </select>
+
+                    <select {...register("teams", { required: true })} defaultValue={selectedUser.teams}>
+                        <option value="">Select Teams</option> {/* Placeholder */}
+                        <option value="222ALL">222ALL</option>
+                        <option value="PTL">PTL</option>
+                        <option value="Training">Training</option>
+                        <option value="Booster">Booster</option>
+                        <option value="Top3">Top3</option>
+                        <option value="Rising6">Rising6</option>
+                        <option value="Flt Leadership">Flt Leadership</option>
+                        <option value="DOMOPS">DOMOPS</option>
+                        <option value="Viewer">Viewer</option>
+                        {/* Add more team options here */}
+                    </select>
+
+                    <select {...register("admin")} defaultValue={selectedUser.admin ? "True" : "False"}>
+                        <option value="True">True</option>
+                        <option value="False">False</option>
+                    </select>
+                    {/* Include other input fields for editing user properties */}
+                    <input type="submit" value="Save Changes" />
+                </form>
+            )}
 
 
-
-            </main>
+            <h2>Users</h2>
+            <table>
+                <thead>
+                <tr>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Mil Email</th>
+                    <th>Civ Email</th>
+                    <th>Personal Phone</th>
+                    <th>Office Phone</th>
+                    <th>Rank</th>
+                    <th>Flight</th>
+                    <th>Workcenter</th>
+                    <th>Teams</th>
+                    <th>Admin</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                    {/* Add more table headers for other user properties */}
+                </tr>
+                </thead>
+                <tbody>
+                {users.map(user => (
+                    <tr key={user.id}>
+                        <td>{user.firstName}</td>
+                        <td>{user.lastName}</td>
+                        <td>{user.milEmail}</td>
+                        <td>{user.civEmail}</td>
+                        <td>{user.personalPhone}</td>
+                        <td>{user.officePhone}</td>
+                        <td>{user.rank}</td>
+                        <td>{user.flight}</td>
+                        <td>{user.workcenter}</td>
+                        <td>{user.teams}</td>
+                        <td>{user.admin}</td>
+                        <td>
+                            <button onClick={() => handleEdit(user.id)}>Edit</button>
+                        </td>
+                        <td>
+                            <button onClick={() => handleDelete(user.id)}>Delete</button>
+                        </td>
+                        {/* Add more table data cells for other user properties */}
+                    </tr>
+                ))}
+                </tbody>
+            </table>
         </div>
-
-
     );
 }
 
