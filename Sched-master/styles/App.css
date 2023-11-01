@@ -65,6 +65,18 @@
   height: 60px;
 }
 
+.nav-text-logout {
+  
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 8px 0px 8px 16px;
+  list-style: none;
+  height: 60px;
+  bottom:0;
+  position:absolute;
+}
+
 .nav-text a {
   text-decoration: none;
   color: #151414;

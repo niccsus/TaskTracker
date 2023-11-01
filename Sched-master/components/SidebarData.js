@@ -29,4 +29,11 @@ export const SidebarData = [
         icons:<RiIcons.RiLogoutBoxFill/>,
         cName:"nav-text",
     },
+    {
+        title:"Logout",
+        path: "/",
+        icons: <FaIcons.FaArrowRight/>,
+        cName: "nav-text",
+        
+    },
 ]
