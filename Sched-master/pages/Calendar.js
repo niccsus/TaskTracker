@@ -4,7 +4,7 @@ import Sidebar from "../components/Sidebar";
 
 const Calendar = () => {
     return (
-        <div className = "calendar">
+        <div className = "calendarrr">
             <h1>Calendar</h1>
 
         </div>
