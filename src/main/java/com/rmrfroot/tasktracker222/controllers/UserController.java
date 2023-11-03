@@ -1,6 +1,5 @@
 package com.rmrfroot.tasktracker222.controllers;
 
-import com.rmrfroot.tasktracker222.awsCognito.PoolClientInterface;
 import com.rmrfroot.tasktracker222.entities.Group;
 import com.rmrfroot.tasktracker222.entities.User;
 import com.rmrfroot.tasktracker222.services.UsersDaoService;
@@ -29,8 +28,8 @@ public class UserController {
     @Autowired
     private UsersDaoService usersDaoService;
 
-    @Autowired
-    private PoolClientInterface poolClientInterface;
+    //@Autowired
+    // PoolClientInterface poolClientInterface;
 
     public UserController(UsersDaoService usersDaoService) {
         super();
@@ -139,7 +138,7 @@ public class UserController {
         try {
             User userToDelete = usersDaoService.findUsersById(request.getId());
 
-            poolClientInterface.deleteUserByUsername(userToDelete.getUserName());
+            //poolClientInterface.deleteUserByUsername(userToDelete.getUserName());
             usersDaoService.deleteById(userToDelete.getId());
         } catch (Exception e) {
             e.printStackTrace();
@@ -191,8 +190,9 @@ public class UserController {
         model.addAttribute("workcenters", Group.getWorkcenters());
         model.addAttribute("teamList", Group.getTeams());
 
-        List<String> userInfoList = poolClientInterface.getUserInfo(principal.getName());
-        String email = userInfoList.get(2); //previously 3
+        //List<String> userInfoList = poolClientInterface.getUserInfo(principal.getName());
+        //String email = userInfoList.get(2); //previously 3
+        String email = "nburt@csus.edu";
         if (usersDaoService.hasUserData(email)) {
             return "redirect:/";
         }
@@ -213,8 +213,10 @@ public class UserController {
     public String saveUser(@Valid @ModelAttribute("users") ValidateUser validateUser, BindingResult errors, Model model, Principal principal) {
 
         try {
-            List<String> userInfoList = poolClientInterface.getUserInfo(principal.getName());
-            String email = userInfoList.get(2); //previously 3
+            //List<String> userInfoList = poolClientInterface.getUserInfo(principal.getName());
+            //String email = userInfoList.get(2); //previously 3
+            String email = "nburt@csus.edu";
+
             if (!usersDaoService.hasUserData(email)) {
                 usersDaoService.registerUserToDatabase(
                         principal.getName(),

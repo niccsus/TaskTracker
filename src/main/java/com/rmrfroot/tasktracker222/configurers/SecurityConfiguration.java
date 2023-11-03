@@ -12,27 +12,19 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
  */
 @Configuration
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
-
-
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.csrf()
-                .disable()
-                .authorizeRequests(auth -> auth.mvcMatchers("/") //users request need to be authorized, such as access token or refresh token
-                        .permitAll()
-                        .anyRequest() //all requests that sent by users
-                        .authenticated()) //need to be authenticated, such as signIN
-                .oauth2Client() //added for Oauth2 error, still have invalid client issue
+        http
+                .authorizeRequests()
+                .antMatchers("/**").permitAll()
+                .anyRequest().authenticated()
                 .and()
-                .oauth2Login() //this use an oauth2login process that we can use MFA(multiple factors authentication)
-                //which we can allow second authentication, such as send a text to a user to verify their signIN process,
-                //but in our case we do not implement it yet.
-                .defaultSuccessUrl("/",true) // default page after a user is successful signIN
+                .formLogin()
+                .loginPage("/login")
+                .permitAll()
                 .and()
                 .logout()
-                .logoutSuccessUrl("https://" + System.getenv("SUBDOMAIN") + ".auth." + System.getenv("AWS_REGION") +
-                        ".amazoncognito.com/logout?client_id=" + System.getenv("COGNITO_CLIENT_ID") +
-                        "&logout_uri=http://localhost:8080")
-        ;
+                .permitAll();
     }
+
 }
