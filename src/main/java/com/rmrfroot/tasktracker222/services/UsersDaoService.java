@@ -1,11 +1,12 @@
 package com.rmrfroot.tasktracker222.services;
 
 import com.rmrfroot.tasktracker222.entities.User;
+import org.springframework.security.core.userdetails.UserDetailsService;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public interface UsersDaoService {
+public interface UsersDaoService extends UserDetailsService {
 
     public List<User> findAll();
 

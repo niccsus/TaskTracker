@@ -1,11 +1,14 @@
 package com.rmrfroot.tasktracker222.services;
 
+import com.rmrfroot.tasktracker222.Repository.UserRepository;
 import com.rmrfroot.tasktracker222.dao.CustomUsersDAO;
 import com.rmrfroot.tasktracker222.dao.UsersDao;
 import com.rmrfroot.tasktracker222.entities.User;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -32,7 +35,8 @@ public class UsersDaoServiceImpl implements UsersDaoService {
     @Autowired
 
     private EntityManager entityManager;
-
+    @Autowired
+    private UserRepository userRepository;
     private CustomUsersDAO customUsersDAO;
 
     @Override
@@ -210,5 +214,22 @@ public class UsersDaoServiceImpl implements UsersDaoService {
                 return true;
         }
         return false;
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+
+        try {
+            System.out.println(userRepository.findByUsername(username).getUsername());
+            User user = findUserByUsername(userRepository.findByUsername(username).getUsername());
+//            User user = userRepository.findByUsername(username);
+            if (user == null){
+                throw new UsernameNotFoundException("User Not Found");
+            }
+            return user;
+        } catch (Exception e) {
+            System.err.println(e);
+        }
+        return new User();
     }
 }

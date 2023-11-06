@@ -37,6 +37,8 @@ public class ValidateUser {
     @NotEmpty()
     private ArrayList<String> teams;
 
+    @NotEmpty()
+    private String password;
 
     public String getFirstName() {
         return firstName;
@@ -117,4 +119,6 @@ public class ValidateUser {
     public void setTeams(ArrayList<String> teams) {
         this.teams = teams;
     }
+
+    public String getPassword() { return password;}
 }

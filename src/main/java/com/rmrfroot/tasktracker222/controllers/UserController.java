@@ -257,4 +257,8 @@ public class UserController {
             return "redirect:/";
         }
     }
+    @GetMapping("/login")
+    String login() {
+        return "login";
+    }
 }

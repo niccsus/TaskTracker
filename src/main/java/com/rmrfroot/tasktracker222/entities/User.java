@@ -5,15 +5,14 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.vladmihalcea.hibernate.type.array.ListArrayType;
 import org.hibernate.annotations.Type;
 import org.hibernate.annotations.TypeDef;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
-import javax.annotation.PostConstruct;
 import javax.persistence.*;
 
 //import java.time.LocalDate;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.*;
 import java.util.regex.Pattern;
 
@@ -29,7 +28,7 @@ import java.util.regex.Pattern;
         name = "team",
         typeClass = ListArrayType.class
 )
-public class User implements Comparable<User>{
+public class User implements UserDetails, Comparable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -37,7 +36,10 @@ public class User implements Comparable<User>{
     private int id;
 
     @Column(name = "username")
-    private String userName;
+    private String username;
+
+    @Column(name = "password")
+    private String password;
 
     @Column(name = "admin")
     private boolean admin;
@@ -75,11 +77,14 @@ public class User implements Comparable<User>{
     @Column(name = "flight")
     private String flight;
 
+    @Column(name = "lastLogin")
+    private Date updateLastLogin;
+
     @Type(type = "team")
     @Column(name = "teams", columnDefinition = "text[]")
     private ArrayList<String> teams;
 
-    
+
     /**
      * Joining tables many to many
      */
@@ -105,7 +110,7 @@ public class User implements Comparable<User>{
 
     /**
      * Creates User with all its attribute
-     * @param userName User's username to login
+     * @param username User's username to login
      * @param firstName User's first name
      * @param lastName User's last name
      * @param militaryEmail User's military email (ie. .mil)
@@ -118,10 +123,10 @@ public class User implements Comparable<User>{
      * @param flight User's flight number
      * @param teams List of team the user is a part of
      */
-    public User(String userName, String firstName, String lastName, String militaryEmail, String civilianEmail, String email,
+    public User(String username, String firstName, String lastName, String militaryEmail, String civilianEmail, String email,
                 String phoneNumber, String officeNumber, String rank, String workCenter,
                 String flight, ArrayList<String> teams) {
-        this.userName = userName;
+        this.username = username;
         this.firstName = firstName;
         this.lastName = lastName;
         this.militaryEmail = militaryEmail;
@@ -136,11 +141,11 @@ public class User implements Comparable<User>{
         this.admin = false;
     }
 
-    @Override public int compareTo(User comparedUser){
+    public int compareTo(User comparedUser){
         return this.getFirstName().compareTo(comparedUser.getFirstName());
     }
 
-     /**
+    /**
      * Get user id
      * @return user id
      */
@@ -492,16 +497,16 @@ public class User implements Comparable<User>{
      * Gets user's username
      * @return user's username
      */
-    public String getUserName() {
-        return userName;
+    public String getUsername() {
+        return username;
     }
 
     /**
      * Sets user's username
-     * @param userName string containing user's username
+     * @param username string containing user's username
      */
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
 
@@ -535,5 +540,46 @@ public class User implements Comparable<User>{
 
     public void setApproved(boolean approved) {
         this.approved = approved;
+    }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return null;
+    }
+
+    @Override
+    public String getPassword() {
+        return password;
+    }
+
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
+
+
+    @Override
+    public int compareTo(Object o) {
+        return 0;
+    }
+
+    public String getUserName() {
+        return username;
     }
 }
