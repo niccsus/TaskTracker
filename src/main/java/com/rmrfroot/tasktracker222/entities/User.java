@@ -542,6 +542,7 @@ public class User implements UserDetails, Comparable {
         this.approved = approved;
     }
 
+    /**Needed to implement userdetails**/
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return null;
@@ -560,7 +561,7 @@ public class User implements UserDetails, Comparable {
 
     @Override
     public boolean isAccountNonLocked() {
-        return true;
+        return approved;
     }
 
     @Override

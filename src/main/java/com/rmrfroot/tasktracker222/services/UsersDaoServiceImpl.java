@@ -102,7 +102,6 @@ public class UsersDaoServiceImpl implements UsersDaoService {
                         "must be at least one user with admin attribute in database.");
                 updatedUser.setAdmin(true);
             }
-
             usersDAO.save(updatedUser);
             return updatedUser;
         } catch (Exception e) {
@@ -203,7 +202,6 @@ public class UsersDaoServiceImpl implements UsersDaoService {
             user.setAdmin(true);
             user.setApproved(true);
         }
-
         usersDAO.save(user);
     }
 
@@ -221,15 +219,15 @@ public class UsersDaoServiceImpl implements UsersDaoService {
 
         try {
             System.out.println(userRepository.findByUsername(username).getUsername());
+            System.out.println(userRepository.findByUsername(username).getPassword());
             User user = findUserByUsername(userRepository.findByUsername(username).getUsername());
-//            User user = userRepository.findByUsername(username);
             if (user == null){
                 throw new UsernameNotFoundException("User Not Found");
             }
             return user;
         } catch (Exception e) {
-            System.err.println(e);
+            System.err.println("LoadUser ERROR!" + e);
         }
-        return new User();
+        return null;
     }
 }

@@ -1,10 +1,14 @@
 package com.rmrfroot.tasktracker222.controllers;
 
+import com.rmrfroot.tasktracker222.Repository.UserRepository;
 import com.rmrfroot.tasktracker222.entities.Group;
 import com.rmrfroot.tasktracker222.entities.User;
 import com.rmrfroot.tasktracker222.services.UsersDaoService;
 import com.rmrfroot.tasktracker222.validations.ValidateUser;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -12,6 +16,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.util.List;
 import java.util.*;
@@ -27,7 +33,8 @@ public class UserController {
 
     @Autowired
     private UsersDaoService usersDaoService;
-
+    @Autowired
+    private UserRepository userRepository;
     //@Autowired
     // PoolClientInterface poolClientInterface;
 
@@ -213,6 +220,7 @@ public class UserController {
     public String saveUser(@Valid @ModelAttribute("users") ValidateUser validateUser, BindingResult errors, Model model, Principal principal) {
 
         try {
+            //need to find a way to get the name of the current user here
             //List<String> userInfoList = poolClientInterface.getUserInfo(principal.getName());
             //String email = userInfoList.get(2); //previously 3
             String email = "nburt@csus.edu";
@@ -261,4 +269,15 @@ public class UserController {
     String login() {
         return "login";
     }
+
+    @GetMapping("/logout")
+    public String logout(HttpServletRequest request, HttpServletResponse response) {
+        //*** maybe here we need to do more about logging out..
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if (auth != null) {
+            new SecurityContextLogoutHandler().logout(request, response, auth);
+        }
+        return "redirect:/login?logout";
+    }
+
 }
