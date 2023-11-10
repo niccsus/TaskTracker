@@ -1,18 +1,23 @@
 package com.rmrfroot.tasktracker222.controllers;
 
 import com.rmrfroot.tasktracker222.Repository.UserRepository;
+import com.rmrfroot.tasktracker222.configurers.SecurityConfiguration;
 import com.rmrfroot.tasktracker222.entities.Group;
 import com.rmrfroot.tasktracker222.entities.User;
 import com.rmrfroot.tasktracker222.services.UsersDaoService;
 import com.rmrfroot.tasktracker222.validations.ValidateUser;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+
 
 import java.security.Principal;
 
@@ -38,6 +43,12 @@ public class UserController {
     //@Autowired
     // PoolClientInterface poolClientInterface;
 
+    private PasswordEncoder PasswordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+
+    PasswordEncoder encoder=PasswordEncoder();
+
     public UserController(UsersDaoService usersDaoService) {
         super();
         this.usersDaoService = usersDaoService;
@@ -47,7 +58,6 @@ public class UserController {
      * Main Page for User Management
      * shows the list of the users in the system
      * and allows admin to change an user's attribute
-     *
      * @param model for the model view controller
      * @return front-end HTML
      */
@@ -81,7 +91,6 @@ public class UserController {
 
         model.addAttribute("users", allUsers);
         model.addAttribute("userEditRequest", userEditRequest);
-
         model.addAttribute("ranks", Group.getRanks());
         model.addAttribute("flights", Group.getFlights());
         model.addAttribute("workcenters", Group.getWorkcenters());
@@ -144,8 +153,6 @@ public class UserController {
     public String userEditDelete(@ModelAttribute("userEditRequest") User request, Principal principal) {
         try {
             User userToDelete = usersDaoService.findUsersById(request.getId());
-
-            //poolClientInterface.deleteUserByUsername(userToDelete.getUserName());
             usersDaoService.deleteById(userToDelete.getId());
         } catch (Exception e) {
             e.printStackTrace();
@@ -189,20 +196,15 @@ public class UserController {
      */
     @GetMapping("/new-user-registration")
     public String addUser(Model model, Principal principal) {
-        User user = new User();
-        model.addAttribute("newUser", user);
-
+        if (principal!=null) {
+            return "redirect:/";
+        }
+        User userAddRequest = new User();
+        model.addAttribute("userAddRequest", userAddRequest);
         model.addAttribute("ranks", Group.getRanks());
         model.addAttribute("flights", Group.getFlights());
         model.addAttribute("workcenters", Group.getWorkcenters());
         model.addAttribute("teamList", Group.getTeams());
-
-        //List<String> userInfoList = poolClientInterface.getUserInfo(principal.getName());
-        //String email = userInfoList.get(2); //previously 3
-        String email = "nburt@csus.edu";
-        if (usersDaoService.hasUserData(email)) {
-            return "redirect:/";
-        }
 
         return "RegistrationForm";
     }
@@ -210,42 +212,41 @@ public class UserController {
     /**
      * Add a user to the database
      *
-     * @param validateUser confirms user is a new user
-     * @param errors       Errors for exception
-     * @param model        view controller
+     * @param request  user object holding the new user's information
      * @param principal    user's credentials
      * @return to access control
      */
-    @PostMapping("/register-new-user")
-    public String saveUser(@Valid @ModelAttribute("users") ValidateUser validateUser, BindingResult errors, Model model, Principal principal) {
-
+    @PostMapping(value = "/register-new-user")
+    public String saveUser(@ModelAttribute("userAddRequest") User request, Principal principal) {
+        System.out.println("Adding user");
         try {
-            //need to find a way to get the name of the current user here
-            //List<String> userInfoList = poolClientInterface.getUserInfo(principal.getName());
-            //String email = userInfoList.get(2); //previously 3
-            String email = "nburt@csus.edu";
-
-            if (!usersDaoService.hasUserData(email)) {
+            if (principal==null) {
+                if (usersDaoService.findUserByUsername(request.getUsername())!=null){
+                    System.out.println("User already exists with that username");
+                    return "redirect:/new-user-registration";
+                }
+                System.out.println(request.getCivilianEmail());
                 usersDaoService.registerUserToDatabase(
-                        principal.getName(),
-                        validateUser.getFirstName(),
-                        validateUser.getLastName(),
-                        validateUser.getMilitaryEmail(),
-                        validateUser.getCivilianEmail(),
-                        email,
-                        validateUser.getPhoneNumber(),
-                        validateUser.getOfficeNumber(),
-                        validateUser.getRank(),
-                        validateUser.getWorkCenter(),
-                        validateUser.getFlight(),
-                        validateUser.getTeams()
+                        request.getUserName(),
+                        encoder.encode(request.getPassword()),
+                        request.getFirstName(),
+                        request.getLastName(),
+                        request.getMilitaryEmail(),
+                        request.getCivilianEmail(),
+                        request.getEmail(),
+                        request.getPhoneNumber(),
+                        request.getOfficeNumber(),
+                        request.getRank(),
+                        request.getWorkCenter(),
+                        request.getFlight(),
+                        request.getTeams()
                 );
-                System.out.println("New user just added to database: " + principal.getName());
+                System.out.println("New user just added to database: " + request.getFirstName());
             } else {
                 return "redirect:/";
             }
         } catch (Exception e) {
-            System.out.println("Could not register user: " + principal.getName());
+            System.out.println("Could not register user: " + request.getFirstName());
             e.printStackTrace();
             return "redirect:/error";
         }
@@ -266,7 +267,7 @@ public class UserController {
         }
     }
     @GetMapping("/login")
-    String login() {
+    public String login() {
         return "login";
     }
 

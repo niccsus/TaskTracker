@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>New User Registration</title>
@@ -19,7 +19,7 @@
 </head>
 
 <body class="registration-body">
-
+<!--
 <svg
         xmlns="http://www.w3.org/2000/svg"
         height="24"
@@ -29,7 +29,6 @@
 >
     <path d="M120-240v-80h720v80H120Zm0-200v-80h720v80H120Zm0-200v-80h720v80H120Z"/>
 </svg>
-
 <div id ="overlay">
 
 </div>
@@ -53,12 +52,22 @@
     </a>
 
 </div>
-
+-->
 <div class="registration-div">
 
     <h1 class="registration-header">New User Registration</h1>
 
-    <form class="registration-form" th:action="@{/register-new-user}" th:object="${newUser}" method="POST" autocomplete="off">
+    <form class="registration-form" th:action="@{/register-new-user}" th:object="${userAddRequest}"  method="post" autocomplete="off">
+
+        <div class="registration-input">
+            <label class="registration-field-label registration-field-required" for="username">Username</label>
+            <input class="registration-test-input" type="text" id="username" th:name="username" required>
+        </div>
+
+        <div class="registration-input">
+            <label class="registration-field-label registration-field-required" for="password">Password</label>
+            <input class="registration-text-input" type="password" id="password" th:name="password" required>
+        </div>
 
         <div class="registration-input">
             <label class="registration-field-label registration-field-required" for="firstName">First Name</label>
@@ -71,18 +80,18 @@
         </div>
 
         <div class="registration-input">
+            <label class="registration-field-label registration-field-required" for="email">Account Email</label>
+            <input class="registration-text-input" type="text" id="email" th:name="email">
+        </div>
+
+        <div class="registration-input">
             <label class="registration-field-label registration-field-required" for="militaryEmail">Mil Email</label>
-            <input class="registration-text-input" type="email" id="militaryEmail" th:name="militaryEmail" required>
+            <input class="registration-text-input" type="text" id="militaryEmail" th:name="militaryEmail">
         </div>
 
         <div class="registration-input">
             <label class="registration-field-label registration-field-required" for="civilianEmail">Civ Email</label>
-            <input class="registration-text-input" type="email" id="civilianEmail" th:name="civilianEmail" required>
-        </div>
-
-        <div class="registration-input">
-            <label class="registration-field-label registration-field-required" for="password">Password</label>
-            <input class="registration-text-input" type="text" id="password" th:name="password" required>
+            <input class="registration-text-input" type="text" id="civilianEmail" th:name="civilianEmail">
         </div>
 
         <div class="registration-input">
@@ -99,7 +108,7 @@
             <label class="registration-field-label registration-field-required" for="rank">Rank</label>
             <select id="rank" th:name="rank">
                 <option></option>
-                <option th:each="rank : ${ranks}" th:value="${rank}" th:text="${rank}"></option>
+                <option th:each="rank : ${ranks}" th:value="${rank}" th:text="${rank}" required></option>
             </select>
         </div>
 
@@ -107,7 +116,7 @@
             <label class="registration-field-label registration-field-required" for="flight">Flight</label>
             <select id="flight" th:name="flight">
                 <option></option>
-                <option th:each="flight : ${flights}" th:value="${flight}" th:text="${flight}"></option>
+                <option th:each="flight : ${flights}" th:value="${flight}" th:text="${flight}" required></option>
             </select>
         </div>
 
@@ -115,7 +124,7 @@
             <label class="registration-field-label registration-field-required" for="workcenter">Workcenter</label>
             <select id="workcenter" th:name="workCenter">
                 <option></option>
-                <option th:each="workcenter : ${workcenters}" th:value="${workcenter}" th:text="${workcenter}"></option>
+                <option th:each="workcenter : ${workcenters}" th:value="${workcenter}" th:text="${workcenter}" required></option>
             </select>
         </div>
 
@@ -123,11 +132,11 @@
             <label class="registration-field-label registration-field-required" for="teams">Teams</label>
             <select id="teams" th:name="teams" multiple>
                 <option></option>
-                <option th:each="team : ${teamList}" th:value="${team}" th:text="${team}"></option>
+                <option th:each="team : ${teamList}" th:value="${team}" th:text="${team}" required></option>
             </select>
         </div>
 
-        <input type="submit" value="Register" class="registration-submit" onclick="return verifyAllFields();">
+        <input id="userRegisterButton"  type="submit" value="Register" class="registration-submit" onclick="return verifyAllFields();">
     </form>
 
 

@@ -187,12 +187,11 @@ public class UsersDaoServiceImpl implements UsersDaoService {
     }
 
     //register the user to the database
-    @Override
     @Transactional
-    public void registerUserToDatabase(String userName, String firstName, String lastName, String militaryEmail, String civilianEmail,
+    public void registerUserToDatabase(String userName,String password, String firstName, String lastName, String militaryEmail, String civilianEmail,
                                        String email, String phoneNumber, String officeNumber, String rank, String workCenter,
                                        String flight, ArrayList<String> teams) {
-        User user = new User(userName, firstName, lastName, militaryEmail, civilianEmail, email,
+        User user = new User(userName,password, firstName, lastName, militaryEmail, civilianEmail, email,
                 phoneNumber, officeNumber, rank, workCenter,
                 flight, teams);
 

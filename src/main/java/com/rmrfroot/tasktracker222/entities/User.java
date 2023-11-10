@@ -123,11 +123,12 @@ public class User implements UserDetails, Comparable {
      * @param flight User's flight number
      * @param teams List of team the user is a part of
      */
-    public User(String username, String firstName, String lastName, String militaryEmail, String civilianEmail, String email,
+    public User(String username,String password, String firstName, String lastName, String militaryEmail, String civilianEmail, String email,
                 String phoneNumber, String officeNumber, String rank, String workCenter,
                 String flight, ArrayList<String> teams) {
         this.username = username;
         this.firstName = firstName;
+        this.password=password;
         this.lastName = lastName;
         this.militaryEmail = militaryEmail;
         this.civilianEmail = civilianEmail;
@@ -509,6 +510,9 @@ public class User implements UserDetails, Comparable {
         this.username = username;
     }
 
+    public void setPassword(String password){
+        this.password=password;
+    }
 
     /**
      * gets user's email

@@ -19,7 +19,7 @@ class ValidateUserTest {
 
     private java.util.ArrayList<String> teamList =new ArrayList<>(Arrays.asList("team1", "team2"));
 
-    private User user1 = new User("brianfrey", "Brian", "Frey",
+    private User user1 = new User("brianfrey","password", "Brian", "Frey",
             "root@gov.com","email@root.edu","email@root.edu",
             "9165555555","1234", "Captain",
             "workCenter","flight",teamList);
