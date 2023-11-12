@@ -7,6 +7,7 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
   "/testcalendar": "pages/testcalendar.js",
 =======
 >>>>>>> 5202cba (test)
@@ -19,10 +20,18 @@
   "/UserProfile": "pages/UserProfile.js",
 >>>>>>> bf295e8 (test)
 =======
+=======
+>>>>>>> af342a8 (test)
   "/UserProfile": "pages/UserProfile.js",
 =======
   "/testcalendar": "pages/testcalendar.js",
 >>>>>>> 71fd90a (Event scheduling)
+<<<<<<< HEAD
 >>>>>>> e79ae06 (Event scheduling)
+=======
+=======
+  "/testcalendar": "pages/testcalendar.js",
+>>>>>>> 002e87fc804937fffedc9c52ba17007c91de858d
+>>>>>>> af342a8 (test)
   "/": "pages/index.js"
 }
