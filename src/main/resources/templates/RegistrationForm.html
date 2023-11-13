@@ -59,10 +59,12 @@
 
     <form class="registration-form" th:action="@{/register-new-user}" th:object="${userAddRequest}"  method="post" autocomplete="off">
 
+        <!--   username is now auto generated so this section isn't necessary anymore
         <div class="registration-input">
             <label class="registration-field-label registration-field-required" for="username">Username</label>
             <input class="registration-test-input" type="text" id="username" th:name="username" required>
         </div>
+        -->
 
         <div class="registration-input">
             <label class="registration-field-label registration-field-required" for="password">Password</label>

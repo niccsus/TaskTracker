@@ -17,6 +17,7 @@ function updateSelectedUser(id) {
 
     updateFieldValue("input-first_name", selected_user.firstName);
     updateFieldValue("input-last_name", selected_user.lastName);
+    updateFieldValue("input-user_name", selected_user.userName);
     updateFieldValue("input-mil_email", selected_user.militaryEmail);
     updateFieldValue("input-civ_email", selected_user.civilianEmail);
     updateFieldValue("input-personal_phone", selected_user.phoneNumber);
