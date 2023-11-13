@@ -1,28 +1,37 @@
 package com.rmrfroot.tasktracker222.entities;
 
 import org.junit.jupiter.api.Test;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class UsersTest {
-/*
+
     int id = 12345;
-    String email = "bfrey@root.edu";
+
+    String password= "password123";
     String fname = "Brian";
     String lname = "Frey";
-    String reg_date = "11/11/22";
-    String up_date = "2/2/23";
-    boolean admin = true;
+    String milEmail = "bfrey@root.edu";
+    String civEmail = "cil@gmail.com";
+    String phoneNumber = "1234567";
+    String officeNumber= "24";
     String rank = "Airman";
     String workCenter = "work center";
     String flight = "flight";
     ArrayList<String> teamList = new ArrayList<String>();
+    String username = fname +"."+lname;
 
-    Users user = new Users(email, fname, lname,
-          reg_date, up_date,
-          admin, rank, workCenter,
+    private PasswordEncoder PasswordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+    PasswordEncoder encoder=PasswordEncoder();
+
+
+    User user = new User(username, encoder.encode(password),fname, lname,milEmail,civEmail,phoneNumber,officeNumber, rank, workCenter,
           flight, teamList);
     @Test
     void getId() {
@@ -37,70 +46,72 @@ class UsersTest {
     }
 
     @Test
-    void getEmail() {
-        assertEquals(email,user.getEmail());
-    }
-
-    @Test
-    void setEmail() {
-        String newEmail = new String("newuser@csus.edu");
-        user.setEmail(newEmail);
-        assertEquals(newEmail,user.getEmail());
-    }
-
-    @Test
     void getFirstName() {
-        assertEquals(fname,user.getFirst_name());
+        assertEquals(fname,user.getFirstName());
     }
 
     @Test
     void setFirstName() {
-        user.setFirst_name("Bill");
-        assertEquals("Bill",user.getFirst_name());
+        user.setFirstName("Bill");
+        assertEquals("Bill",user.getFirstName());
     }
 
-//    @Test
-//    void getLastName() {
-//        assertEquals(lname,user.setFirst_name());
-//    }
+    @Test
+    void getLastName() {
+        assertEquals(lname,user.getLastName());
+    }
 
     @Test
     void setLastName() {
-        user.setLast_name("Lee");
-        assertEquals("Lee",user.getLast_name());
-    }
-
-    @Test
-    void getRegister_date() {
-        assertEquals(reg_date,user.getRegister_date());
-    }
-
-    @Test
-    void setRegister_date() {
-        user.setRegister_date("12/12/22");
-        assertEquals("12/12/22",user.getRegister_date());
-    }
-
-    @Test
-    void getUpdate_date() {
-        assertEquals(up_date,user.getUpdate_date());
-    }
-
-    @Test
-    void setUpdate_date() {
-        user.setUpdate_date("5/5/25");
-        assertEquals("5/5/25",user.getUpdate_date());
+        user.setLastName("Lee");
+        assertEquals("Lee",user.getLastName());
     }
 
     @Test
     void isAdmin() {
-        assertEquals(admin,user.isAdmin());
+        assertFalse(user.isAdmin());
     }
 
     @Test
     void setAdmin() {
-        user.setAdmin(false);
-        assertEquals(false,user.isAdmin());
+        user.setAdmin(true);
+        assertTrue(user.isAdmin());
+    }
+
+    @Test
+    void getMilEmail() {
+        assertEquals(milEmail,user.getMilitaryEmail());
+    }
+
+    @Test
+    void setMilEmail() {
+        String newEmail = new String("newuser@csus.edu");
+        user.setMilitaryEmail(newEmail);
+        assertEquals(newEmail,user.getMilitaryEmail());
+    }
+
+    @Test
+    void getCivEmail() {
+        assertEquals(milEmail,user.getMilitaryEmail());
+    }
+
+    @Test
+    void setCivEmail() {
+        String newEmail = new String("newuser@csus.edu");
+        user.setCivilianEmail(newEmail);
+        assertEquals(newEmail,user.getCivilianEmail());
+    }
+
+    @Test
+    void getPhoneNumber(){
+        assertEquals(phoneNumber,user.getPhoneNumber());
+    }
+
+    @Test
+    void setPhoneNumber(){
+        String newPhoneNumber = "2345678";
+        user.setPhoneNumber(newPhoneNumber);
+        assertEquals(newPhoneNumber,user.getPhoneNumber());
     }
 
     @Test
@@ -136,5 +147,15 @@ class UsersTest {
         assertEquals("Other Flight",user.getFlight());
     }
 
- */
+    @Test
+    void getTeams(){
+        assertEquals(teamList,user.getTeams());
+    }
+
+    @Test
+    void setTeams(){
+        ArrayList<String> newTeamList=new ArrayList<String>();
+        user.setTeams(newTeamList);
+        assertEquals(newTeamList,user.getTeams());
+    }
 }

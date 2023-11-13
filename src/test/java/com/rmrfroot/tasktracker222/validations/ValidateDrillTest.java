@@ -27,7 +27,7 @@ public class ValidateDrillTest {
     Validator validator = factory.getValidator();
 
     private Drill testDrill = new Drill("Test Drill",date1,date2,date3,"Sacramento",4321,
-            "Thomas O","description",participants);
+            "description",participants);
 
     @Test
     void getId(){

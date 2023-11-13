@@ -20,7 +20,7 @@ class ValidateUserTest {
     private java.util.ArrayList<String> teamList =new ArrayList<>(Arrays.asList("team1", "team2"));
 
     private User user1 = new User("brianfrey","password", "Brian", "Frey",
-            "root@gov.com","email@root.edu","email@root.edu",
+            "root@gov.com","email@root.edu",
             "9165555555","1234", "Captain",
             "workCenter","flight",teamList);
 
@@ -29,8 +29,6 @@ class ValidateUserTest {
 
     @Test
     void getFirstName() {
-
-        //user1.setFirstName("");
         user1.getFirstName();
         Set<ConstraintViolation<User>> violations = validator.validate(user1);
 
@@ -193,8 +191,6 @@ class ValidateUserTest {
 
     @Test
     void setWorkCenter() throws FileNotFoundException{
-
-        //user1.setWorkCenter("workcenter.txt");
         Set<ConstraintViolation<User>> violations = validator.validate(user1);
         for (ConstraintViolation<User> violation : violations) {
             System.out.println(violation.getMessage());
@@ -203,7 +199,6 @@ class ValidateUserTest {
 
     @Test
     void getFlight() {
-
         user1.getFlight();
         Set<ConstraintViolation<User>> violations = validator.validate(user1);
         for (ConstraintViolation<User> violation : violations) {

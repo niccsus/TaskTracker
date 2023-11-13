@@ -11,9 +11,6 @@ import java.security.Principal;
 @Controller
 public class MainController {
 
-    //@Autowired
-    //private PoolClientInterface poolClientInterface;
-
     @Autowired
     private UsersDaoService usersDaoService;
 

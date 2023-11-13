@@ -132,7 +132,6 @@ public class User implements UserDetails, Comparable {
         this.lastName = lastName;
         this.militaryEmail = militaryEmail;
         this.civilianEmail = civilianEmail;
-
         this.phoneNumber = phoneNumber;
         this.officeNumber = officeNumber;
         this.rank = rank;
