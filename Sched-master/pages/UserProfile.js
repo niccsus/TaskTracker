@@ -294,13 +294,13 @@ function UserProfile() {
                     <tr key={user.id}>
                         <td>{user.firstName}</td>
                         <td>{user.lastName}</td>
-                        <td>{user.milEmail}</td>
-                        <td>{user.civEmail}</td>
-                        <td>{user.personalPhone}</td>
-                        <td>{user.officePhone}</td>
+                        <td>{user.militaryEmail}</td>
+                        <td>{user.civilianEmail}</td>
+                        <td>{user.phoneNumber}</td>
+                        <td>{user.officeNumber}</td>
                         <td>{user.rank}</td>
                         <td>{user.flight}</td>
-                        <td>{user.workcenter}</td>
+                        <td>{user.workCenter}</td>
                         <td>{user.teams}</td>
                         <td>{user.admin}</td>
                         <td>

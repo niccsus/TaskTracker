@@ -24,14 +24,14 @@ select {
 
 input[type="submit"] {
     width: auto;
-    padding: 10px;
+    padding: 16px 32px;
     background-color: #808080;
     color: #000000;
     border: none;
     border-radius: 3px;
     cursor: pointer;
     display: block;
-    margin: 0 auto;
+    margin: 4px 2px;
 }
 
 /* Table styling */
