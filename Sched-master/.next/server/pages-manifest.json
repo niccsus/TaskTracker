@@ -2,36 +2,6 @@
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-  "/testcalendar": "pages/testcalendar.js",
-=======
->>>>>>> 5202cba (test)
-=======
-  "/UserProfile": "pages/UserProfile.js",
->>>>>>> 98fa39e (test)
-=======
->>>>>>> 33169e3 (test)
-=======
-  "/UserProfile": "pages/UserProfile.js",
->>>>>>> bf295e8 (test)
-=======
-=======
->>>>>>> af342a8 (test)
-  "/UserProfile": "pages/UserProfile.js",
-=======
-  "/testcalendar": "pages/testcalendar.js",
->>>>>>> 71fd90a (Event scheduling)
-<<<<<<< HEAD
->>>>>>> e79ae06 (Event scheduling)
-=======
-=======
-  "/testcalendar": "pages/testcalendar.js",
->>>>>>> 002e87fc804937fffedc9c52ba17007c91de858d
->>>>>>> af342a8 (test)
+  "/Calendar": "pages/Calendar.js",
   "/": "pages/index.js"
 }

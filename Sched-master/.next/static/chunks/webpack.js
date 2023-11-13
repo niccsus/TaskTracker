@@ -103,57 +103,6 @@
 /******/ 		};
 /******/ 	}();
 /******/ 	
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-=======
-<<<<<<< HEAD
->>>>>>> e79ae06 (Event scheduling)
-=======
->>>>>>> 002e87fc804937fffedc9c52ba17007c91de858d
->>>>>>> af342a8 (test)
-/******/ 	/* webpack/runtime/create fake namespace object */
-/******/ 	!function() {
-/******/ 		var getProto = Object.getPrototypeOf ? function(obj) { return Object.getPrototypeOf(obj); } : function(obj) { return obj.__proto__; };
-/******/ 		var leafPrototypes;
-/******/ 		// create a fake namespace object
-/******/ 		// mode & 1: value is a module id, require it
-/******/ 		// mode & 2: merge all properties of value into the ns
-/******/ 		// mode & 4: return value when already ns object
-/******/ 		// mode & 16: return value when it's Promise-like
-/******/ 		// mode & 8|1: behave like require
-/******/ 		__webpack_require__.t = function(value, mode) {
-/******/ 			if(mode & 1) value = this(value);
-/******/ 			if(mode & 8) return value;
-/******/ 			if(typeof value === 'object' && value) {
-/******/ 				if((mode & 4) && value.__esModule) return value;
-/******/ 				if((mode & 16) && typeof value.then === 'function') return value;
-/******/ 			}
-/******/ 			var ns = Object.create(null);
-/******/ 			__webpack_require__.r(ns);
-/******/ 			var def = {};
-/******/ 			leafPrototypes = leafPrototypes || [null, getProto({}), getProto([]), getProto(getProto)];
-/******/ 			for(var current = mode & 2 && value; typeof current == 'object' && !~leafPrototypes.indexOf(current); current = getProto(current)) {
-/******/ 				Object.getOwnPropertyNames(current).forEach(function(key) { def[key] = function() { return value[key]; }; });
-/******/ 			}
-/******/ 			def['default'] = function() { return value; };
-/******/ 			__webpack_require__.d(ns, def);
-/******/ 			return ns;
-/******/ 		};
-/******/ 	}();
-/******/ 	
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 5202cba (test)
-=======
->>>>>>> 71fd90a (Event scheduling)
->>>>>>> e79ae06 (Event scheduling)
-=======
->>>>>>> 71fd90a (Event scheduling)
-=======
->>>>>>> 002e87fc804937fffedc9c52ba17007c91de858d
->>>>>>> af342a8 (test)
 /******/ 	/* webpack/runtime/define property getters */
 /******/ 	!function() {
 /******/ 		// define getter functions for harmony exports
@@ -182,43 +131,7 @@
 /******/ 	
 /******/ 	/* webpack/runtime/getFullHash */
 /******/ 	!function() {
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-/******/ 		__webpack_require__.h = function() { return "3f364e2bb6087c50"; }
-=======
-/******/ 		__webpack_require__.h = function() { return "b3b237bf5908fbd5"; }
->>>>>>> 5202cba (test)
-=======
-/******/ 		__webpack_require__.h = function() { return "3f50b942402b06a4"; }
->>>>>>> 2542896 (test)
-=======
-/******/ 		__webpack_require__.h = function() { return "4c8e3a2edd213111"; }
->>>>>>> 98fa39e (test)
-=======
-/******/ 		__webpack_require__.h = function() { return "3f50b942402b06a4"; }
->>>>>>> 33169e3 (test)
-=======
-/******/ 		__webpack_require__.h = function() { return "3b29f215203df4ac"; }
->>>>>>> bf295e8 (test)
-=======
-=======
->>>>>>> af342a8 (test)
-/******/ 		__webpack_require__.h = function() { return "3b29f215203df4ac"; }
-=======
-/******/ 		__webpack_require__.h = function() { return "3f364e2bb6087c50"; }
->>>>>>> 71fd90a (Event scheduling)
-<<<<<<< HEAD
->>>>>>> e79ae06 (Event scheduling)
-=======
-=======
-/******/ 		__webpack_require__.h = function() { return "3f364e2bb6087c50"; }
->>>>>>> 002e87fc804937fffedc9c52ba17007c91de858d
->>>>>>> af342a8 (test)
+/******/ 		__webpack_require__.h = function() { return "4d5888ad26fc0415"; }
 /******/ 	}();
 /******/ 	
 /******/ 	/* webpack/runtime/global */

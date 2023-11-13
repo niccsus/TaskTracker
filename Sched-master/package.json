@@ -1,72 +1,22 @@
 {
-  "private": true,
-  "scripts": {
-    "build": "next build",
-    "dev": "next dev",
-    "start": "next start"
-  },
-  "dependencies": {
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-    "@headlessui/react": "^1.7.17",
-    "@heroicons/react": "^2.0.18",
-    "next": "^13.5.6",
-=======
-    "next": "^13.5.4",
->>>>>>> 5202cba (test)
-=======
-=======
->>>>>>> af342a8 (test)
-    "next": "^13.5.4",
-=======
-    "@headlessui/react": "^1.7.17",
-    "@heroicons/react": "^2.0.18",
-    "next": "^13.5.6",
->>>>>>> 71fd90a (Event scheduling)
-<<<<<<< HEAD
->>>>>>> e79ae06 (Event scheduling)
-=======
-=======
-    "@headlessui/react": "^1.7.17",
-    "@heroicons/react": "^2.0.18",
-    "next": "^13.5.6",
->>>>>>> 002e87fc804937fffedc9c52ba17007c91de858d
->>>>>>> af342a8 (test)
-    "react": "18.2.0",
-    "react-dom": "18.2.0",
-    "react-icons": "^4.11.0"
-  },
-  "engines": {
-    "node": ">=18"
-  },
-  "devDependencies": {
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-    "@types/node": "20.8.9",
-    "@types/react": "18.2.33",
-=======
-    "@types/node": "20.8.6",
-    "@types/react": "18.2.28",
->>>>>>> 5202cba (test)
-=======
-=======
->>>>>>> af342a8 (test)
-    "@types/node": "20.8.6",
-    "@types/react": "18.2.28",
-=======
-    "@types/node": "20.8.9",
-    "@types/react": "18.2.33",
->>>>>>> 71fd90a (Event scheduling)
-<<<<<<< HEAD
->>>>>>> e79ae06 (Event scheduling)
-=======
-=======
-    "@types/node": "20.8.9",
-    "@types/react": "18.2.33",
->>>>>>> 002e87fc804937fffedc9c52ba17007c91de858d
->>>>>>> af342a8 (test)
-    "typescript": "5.2.2"
+    "private": true,
+    "scripts": {
+      "build": "next build",
+      "dev": "next dev",
+      "start": "next start"
+    },
+    "dependencies": {
+      "next": "^14.0.1",
+      "react": "18.2.0",
+      "react-dom": "18.2.0",
+      "react-icons": "^4.11.0"
+    },
+    "engines": {
+      "node": ">=18"
+    },
+    "devDependencies": {
+      "@types/node": "20.8.10",
+      "@types/react": "18.2.33",
+      "typescript": "5.2.2"
+    }
   }
-}
