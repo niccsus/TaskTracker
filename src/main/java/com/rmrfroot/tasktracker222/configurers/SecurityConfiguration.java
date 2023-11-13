@@ -1,38 +1,57 @@
 package com.rmrfroot.tasktracker222.configurers;
 
+import com.rmrfroot.tasktracker222.services.UsersDaoService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.ProviderManager;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.SecurityFilterChain;
 
-/**
- * this class has configured with the application.properties file by using
- * the Spring Security Oauth2 that allows a third party application to get
- * a limit access to the application such as HTTPS or HTTP requests.
- * @author Visoth Cheam
- */
 @Configuration
-public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
+@EnableWebSecurity
+public class SecurityConfiguration {
 
+    @Autowired
+    private UsersDaoService userDetailsService;
 
-    @Override
-    protected void configure(HttpSecurity http) throws Exception {
-        http.csrf()
-                .disable()
-                .authorizeRequests(auth -> auth.mvcMatchers("/") //users request need to be authorized, such as access token or refresh token
-                        .permitAll()
-                        .anyRequest() //all requests that sent by users
-                        .authenticated()) //need to be authenticated, such as signIN
-                .oauth2Client() //added for Oauth2 error, still have invalid client issue
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+
+    @Bean
+    public AuthenticationManager authenticationManager() throws Exception {
+        DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
+        authenticationProvider.setUserDetailsService(userDetailsService);
+        authenticationProvider.setPasswordEncoder(passwordEncoder());
+
+        ProviderManager providerManager = new ProviderManager(authenticationProvider);
+        providerManager.setEraseCredentialsAfterAuthentication(false);
+
+        return providerManager;
+    }
+
+    @Bean
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+        http.authorizeRequests()
+                .antMatchers("/login","/new-user-registration","/register-new-user").permitAll()
+                .antMatchers("/**").authenticated()
                 .and()
-                .oauth2Login() //this use an oauth2login process that we can use MFA(multiple factors authentication)
-                //which we can allow second authentication, such as send a text to a user to verify their signIN process,
-                //but in our case we do not implement it yet.
-                .defaultSuccessUrl("/",true) // default page after a user is successful signIN
+                .formLogin()
+                .loginPage("/login")
+                .defaultSuccessUrl("/",true)
                 .and()
                 .logout()
-                .logoutSuccessUrl("https://" + System.getenv("SUBDOMAIN") + ".auth." + System.getenv("AWS_REGION") +
-                        ".amazoncognito.com/logout?client_id=" + System.getenv("COGNITO_CLIENT_ID") +
-                        "&logout_uri=http://localhost:8080")
+                .logoutUrl("/logout") // URL where the logout request is sent
+                .logoutSuccessUrl("/login?logout") // Redirect to this URL after successful logout
         ;
+        return http.build();
     }
+
 }

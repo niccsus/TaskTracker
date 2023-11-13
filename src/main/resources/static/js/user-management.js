@@ -20,7 +20,7 @@ function updateSelectedUser(id) {
     updateFieldValue("input-mil_email", selected_user.militaryEmail);
     updateFieldValue("input-civ_email", selected_user.civilianEmail);
     updateFieldValue("input-personal_phone", selected_user.phoneNumber);
-    updateFieldValue("input-office_phone", selected_user.officeNumber);
+    updateFieldValue("input-office_number", selected_user.officeNumber);
     updateFieldValue("input-id", selected_user.id);
 
 

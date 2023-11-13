@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>User Management</title>
@@ -132,14 +132,14 @@
                             <th class="user-management-entry">Mil Email</th>
                             <td class="user-management-value-cell">
                                 <input id="input-mil_email" class="user-management-value" type="email"
-                                       th:field="*{militaryEmail}" required>
+                                       th:field="*{militaryEmail}">
                             </td>
                         </tr>
                         <tr>
                             <th class="user-management-entry">Civ Email</th>
                             <td class="user-management-value-cell">
                                 <input id="input-civ_email" class="user-management-value" type="email"
-                                       th:field="*{civilianEmail}" required>
+                                       th:field="*{civilianEmail}">
                             </td>
                         </tr>
                         <tr>
@@ -150,9 +150,9 @@
                             </td>
                         </tr>
                         <tr>
-                            <th class="user-management-entry">Office Phone</th>
+                            <th class="user-management-entry">Office Number</th>
                             <td class="user-management-value-cell">
-                                <input id="input-office_phone" class="user-management-value" type="text"
+                                <input id="input-office_number" class="user-management-value" type="text"
                                        th:field="*{officeNumber}">
                             </td>
                         </tr>

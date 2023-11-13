@@ -1,11 +1,14 @@
 package com.rmrfroot.tasktracker222.services;
 
+import com.rmrfroot.tasktracker222.Repository.UserRepository;
 import com.rmrfroot.tasktracker222.dao.CustomUsersDAO;
 import com.rmrfroot.tasktracker222.dao.UsersDao;
 import com.rmrfroot.tasktracker222.entities.User;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -32,7 +35,8 @@ public class UsersDaoServiceImpl implements UsersDaoService {
     @Autowired
 
     private EntityManager entityManager;
-
+    @Autowired
+    private UserRepository userRepository;
     private CustomUsersDAO customUsersDAO;
 
     @Override
@@ -98,7 +102,6 @@ public class UsersDaoServiceImpl implements UsersDaoService {
                         "must be at least one user with admin attribute in database.");
                 updatedUser.setAdmin(true);
             }
-
             usersDAO.save(updatedUser);
             return updatedUser;
         } catch (Exception e) {
@@ -184,12 +187,17 @@ public class UsersDaoServiceImpl implements UsersDaoService {
     }
 
     //register the user to the database
-    @Override
     @Transactional
-    public void registerUserToDatabase(String userName, String firstName, String lastName, String militaryEmail, String civilianEmail,
-                                       String email, String phoneNumber, String officeNumber, String rank, String workCenter,
-                                       String flight, ArrayList<String> teams) {
-        User user = new User(userName, firstName, lastName, militaryEmail, civilianEmail, email,
+    public void registerUserToDatabase(String userName,String password, String firstName, String lastName, String militaryEmail, String civilianEmail,
+                                       String phoneNumber, String officeNumber, String rank, String workCenter,
+                                       String flight, ArrayList<String> teams)
+
+    {
+        String UsernameConCat = firstName + '.' + lastName;
+
+
+
+        User user = new User(UsernameConCat,password, firstName, lastName, militaryEmail, civilianEmail,
                 phoneNumber, officeNumber, rank, workCenter,
                 flight, teams);
 
@@ -199,6 +207,8 @@ public class UsersDaoServiceImpl implements UsersDaoService {
             user.setAdmin(true);
             user.setApproved(true);
         }
+
+
 
         usersDAO.save(user);
     }
@@ -210,5 +220,22 @@ public class UsersDaoServiceImpl implements UsersDaoService {
                 return true;
         }
         return false;
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+
+        try {
+            System.out.println(userRepository.findByUsername(username).getUsername());
+            System.out.println(userRepository.findByUsername(username).getPassword());
+            User user = findUserByUsername(userRepository.findByUsername(username).getUsername());
+            if (user == null){
+                throw new UsernameNotFoundException("User Not Found");
+            }
+            return user;
+        } catch (Exception e) {
+            System.err.println("LoadUser ERROR!" + e);
+        }
+        return null;
     }
 }

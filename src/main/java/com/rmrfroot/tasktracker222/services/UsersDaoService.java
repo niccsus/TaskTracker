@@ -1,11 +1,12 @@
 package com.rmrfroot.tasktracker222.services;
 
 import com.rmrfroot.tasktracker222.entities.User;
+import org.springframework.security.core.userdetails.UserDetailsService;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public interface UsersDaoService {
+public interface UsersDaoService extends UserDetailsService {
 
     public List<User> findAll();
 
@@ -22,8 +23,8 @@ public interface UsersDaoService {
 
     public User findUserByEmail(String email);
     public User findUsersById(int id);
-    public void registerUserToDatabase(String userName, String firstName, String lastName, String militaryEmail, String civilianEmail,
-                                       String email,String phoneNumber, String officeNumber, String rank, String workCenter,
+    public void registerUserToDatabase(String userName,String password, String firstName, String lastName, String militaryEmail, String civilianEmail,
+                                       String phoneNumber, String officeNumber, String rank, String workCenter,
                                        String flight, ArrayList<String> teams);
 
     public boolean isAdminPresent();
