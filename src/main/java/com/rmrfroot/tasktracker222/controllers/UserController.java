@@ -233,7 +233,7 @@ public class UserController {
                         request.getLastName(),
                         request.getMilitaryEmail(),
                         request.getCivilianEmail(),
-                        request.getEmail(),
+                        //request.getEmail(),
                         request.getPhoneNumber(),
                         request.getOfficeNumber(),
                         request.getRank(),

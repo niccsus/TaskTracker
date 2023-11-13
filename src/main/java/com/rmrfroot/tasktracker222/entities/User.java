@@ -59,8 +59,8 @@ public class User implements UserDetails, Comparable {
     @Column(name = "civ_email")
     private String civilianEmail;
 
-    @Column(name = "email")
-    private String email;
+    //@Column(name = "email")
+    //private String email;
 
     @Column(name = "phone_number")
     private String phoneNumber;
@@ -115,7 +115,7 @@ public class User implements UserDetails, Comparable {
      * @param lastName User's last name
      * @param militaryEmail User's military email (ie. .mil)
      * @param civilianEmail User's civilian email (ie. gmail, yahoo, ...)
-     * @param email User's email
+
      * @param phoneNumber User's phone number
      * @param officeNumber User's office phone number
      * @param rank User's rank
@@ -123,7 +123,7 @@ public class User implements UserDetails, Comparable {
      * @param flight User's flight number
      * @param teams List of team the user is a part of
      */
-    public User(String username,String password, String firstName, String lastName, String militaryEmail, String civilianEmail, String email,
+    public User(String username,String password, String firstName, String lastName, String militaryEmail, String civilianEmail,
                 String phoneNumber, String officeNumber, String rank, String workCenter,
                 String flight, ArrayList<String> teams) {
         this.username = username;
@@ -132,7 +132,7 @@ public class User implements UserDetails, Comparable {
         this.lastName = lastName;
         this.militaryEmail = militaryEmail;
         this.civilianEmail = civilianEmail;
-        this.email = email;
+
         this.phoneNumber = phoneNumber;
         this.officeNumber = officeNumber;
         this.rank = rank;
@@ -518,17 +518,6 @@ public class User implements UserDetails, Comparable {
      * gets user's email
      * @return user's email
      */
-    public String getEmail() {
-        return email;
-    }
-
-    /**
-     * Sets user's email
-     * @param email string containing user's email
-     */
-    public void setEmail(String email) {
-        this.email = email;
-    }
 
 
     public void setAdmin(boolean toSet){

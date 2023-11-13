@@ -189,9 +189,15 @@ public class UsersDaoServiceImpl implements UsersDaoService {
     //register the user to the database
     @Transactional
     public void registerUserToDatabase(String userName,String password, String firstName, String lastName, String militaryEmail, String civilianEmail,
-                                       String email, String phoneNumber, String officeNumber, String rank, String workCenter,
-                                       String flight, ArrayList<String> teams) {
-        User user = new User(userName,password, firstName, lastName, militaryEmail, civilianEmail, email,
+                                       String phoneNumber, String officeNumber, String rank, String workCenter,
+                                       String flight, ArrayList<String> teams)
+
+    {
+        String UsernameConCat = firstName + '.' + lastName;
+
+
+
+        User user = new User(UsernameConCat,password, firstName, lastName, militaryEmail, civilianEmail,
                 phoneNumber, officeNumber, rank, workCenter,
                 flight, teams);
 
@@ -201,6 +207,9 @@ public class UsersDaoServiceImpl implements UsersDaoService {
             user.setAdmin(true);
             user.setApproved(true);
         }
+
+
+
         usersDAO.save(user);
     }
 
