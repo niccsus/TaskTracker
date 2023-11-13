@@ -3,21 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <title>New User Registration</title>
-
-    <a href="UserProfile"><img src="222-ISS-logo.png"
-     style="width:150px;height:150px;">
-    </a>
-
-    <!--"HomePage.html" to be added later on-->
-
-    
+        
     <link rel="stylesheet" href="registration-form.css">
     <link rel="stylesheet" href="drillSchStyle.css">
     <link rel="stylesheet" href="chosen-registration.css">
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script th:src="@{/js/chosen.jquery.js}" type="text/javascript"></script>
-    <script src="script.js"></script>
+    <!--<script th:src="@{/js/chosen.jquery.js}" type="text/javascript"></script>-->
 </head>
 
 <body class="registration-body">
@@ -95,32 +87,68 @@
         <div class="registration-input">
             <label class="registration-field-label registration-field-required" for="rank">Rank</label>
             <select id="rank" th:name="rank">
-                <option></option>
-                <option th:each="rank : ${ranks}" th:value="${rank}" th:text="${rank}"></option>
+                <option th:value="selectrank">--- Select rank ---</option>
+                <!--<option th:each="rank : ${ranks}" th:value="${rank}" th:text="${rank}"></option>-->
+                <option th:value="AB" >AB</option>
+                <option th:each="rank : ${ranks}" th:value="Amn" th:text="${rank}">Amn</option>
+                <option th:each="rank : ${ranks}" th:value="A1C" th:text="${rank}">A1C</option>
+                <option th:each="rank : ${ranks}" th:value="SrA" th:text="${rank}">SrA</option>
+                <option th:each="rank : ${ranks}" th:value="SSgt" th:text="${rank}">SSgt</option>
+                <option th:each="rank : ${ranks}" th:value="TSgt" th:text="${rank}">TSgt</option>
+                <option th:each="rank : ${ranks}" th:value="MSgt" th:text="${rank}">MSgt</option>
+                <option th:each="rank : ${ranks}" th:value="SMSgt" th:text="${rank}">SMSgt</option>
+                <option th:each="rank : ${ranks}" th:value="CMSgt" th:text="${rank}">CMSgt</option>
+                <option th:each="rank : ${ranks}" th:value="CCM" th:text="${rank}">CCM</option>
+                <option th:each="rank : ${ranks}" th:value="CMSAF" th:text="${rank}">CMSAF</option>
+                <option th:each="rank : ${ranks}" th:value="2nd Lt" th:text="${rank}">2nd Lt</option>
+                <option th:each="rank : ${ranks}" th:value="1st Lt" th:text="${rank}">1st Lt</option>
+                <option th:each="rank : ${ranks}" th:value="Capt" th:text="${rank}">Capt</option>
+                <option th:each="rank : ${ranks}" th:value="Maj" th:text="${rank}">Maj</option>
+                <option th:each="rank : ${ranks}" th:value="Lt Col" th:text="${rank}">Lt Col</option>
+                <option th:each="rank : ${ranks}" th:value="Col" th:text="${rank}">Col</option>
+                <option th:each="rank : ${ranks}" th:value="Brig Gen" th:text="${rank}">Brig Gen</option>
+                <option th:each="rank : ${ranks}" th:value="Maj Gen" th:text="${rank}">Maj Gen</option>
+                <option th:each="rank : ${ranks}" th:value="Lt Gen" th:text="${rank}">Lt Gen</option>
+                <option th:each="rank : ${ranks}" th:value="Gen" th:text="${rank}">Gen</option>
+                <option th:each="rank : ${ranks}" th:value="GOAF" th:text="${rank}">GOAF</option>
             </select>
         </div>
 
         <div class="registration-input">
             <label class="registration-field-label registration-field-required" for="flight">Flight</label>
             <select id="flight" th:name="flight">
-                <option></option>
-                <option th:each="flight : ${flights}" th:value="${flight}" th:text="${flight}"></option>
+                <option th:value="selectflight">--- Select flight ---</option>
+                <option th:each="flight : ${flights}" th:value="CMD" th:text="${flight}">CMD</option>
+                <option th:each="flight : ${flights}" th:value="SCO1" th:text="${flight}">SCO1</option>
+                <option th:each="flight : ${flights}" th:value="SCO2" th:text="${flight}">SCO2</option>
+                <option th:each="flight : ${flights}" th:value="SCP" th:text="${flight}">SCP</option>
             </select>
         </div>
 
         <div class="registration-input">
             <label class="registration-field-label registration-field-required" for="workcenter">Workcenter</label>
             <select id="workcenter" th:name="workCenter">
-                <option></option>
-                <option th:each="workcenter : ${workcenters}" th:value="${workcenter}" th:text="${workcenter}"></option>
+                <option th:value="selectworkcenter">--- Select workcenter ---</option>
+                <option th:each="workcenter : ${workcenters}" th:value="SCOP" th:text="${workcenter}">SCOP</option>
+                <option th:each="workcenter : ${workcenters}" th:value="SCOS" th:text="${workcenter}">SCOS</option>
+                <option th:each="workcenter : ${workcenters}" th:value="SCOX" th:text="${workcenter}">SCOX</option>
+                <option th:each="workcenter : ${workcenters}" th:value="SCOI" th:text="${workcenter}">SCOI</option>
+                <option th:each="workcenter : ${workcenters}" th:value="SCOT" th:text="${workcenter}">SCOT</option>
             </select>
         </div>
 
         <div class="registration-input">
-            <label class="registration-field-label registration-field-required" for="teams">Teams</label>
+            <label class="registration-field-label registration-field-required" for="teams">Teams (hold CTRL and select teams)</label>
             <select id="teams" th:name="teams" multiple>
-                <option></option>
-                <option th:each="team : ${teamList}" th:value="${team}" th:text="${team}"></option>
+                <option th:each="team : ${teamList}" th:value="222ALL" th:text="${team}">222ALL</option>
+                <option th:each="team : ${teamList}" th:value="PTL" th:text="${team}">PTL</option>
+                <option th:each="team : ${teamList}" th:value="Training" th:text="${team}">Training</option>
+                <option th:each="team : ${teamList}" th:value="Booster" th:text="${team}">Booster</option>
+                <option th:each="team : ${teamList}" th:value="Top3" th:text="${team}">Top3</option>
+                <option th:each="team : ${teamList}" th:value="Rising6" th:text="${team}">Rising6</option>
+                <option th:each="team : ${teamList}" th:value="Flt Leadership" th:text="${team}">Flt Leadership</option>
+                <option th:each="team : ${teamList}" th:value="DOMOPS" th:text="${team}">DOMOPS</option>
+                <option th:each="team : ${teamList}" th:value="Viewer" th:text="${team}">Viewer</option>
             </select>
         </div>
 
@@ -156,14 +184,18 @@
     });
 
     function verifyAllFields() {
+        var optionsRank = document.getElementById("rank");
+        var optionsFlight = document.getElementById("flight");
+        var optionsWorkcenter = document.getElementById("workcenter");
         try {
-            if ($("#rank").val().length === 0) {
+            /*console.log($("#rank").val());*/
+            if (optionsRank.selectedIndex <= 0) {
                 alert("Please select a rank!");
                 return false;
-            } else if ($("#flight").val().length === 0) {
+            } else if (optionsFlight.selectedIndex <= 0) {
                 alert("Please select a flight!");
                 return false;
-            } else if ($("#workcenter").val().length === 0) {
+            } else if (optionsWorkcenter.selectedIndex <= 0) {
                 alert("Please select a workcenter!");
                 return false;
             } else if ($("#teams").val().length === 0) {
@@ -178,5 +210,6 @@
         }
     }
 </script>
+<script type = "text/javascript" src="./script.js"></script>
 </body>
 </html>
