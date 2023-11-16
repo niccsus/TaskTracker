@@ -76,7 +76,7 @@ export default function Home(){
         setShowModal(false)
         setNewEvent({
             title: '',
-            start: '',
+            start: null,
             allDay: false,
             id:0
         })
@@ -84,7 +84,7 @@ export default function Home(){
         setIdToDelete(null)
     }
 
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void =>{
+    const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>): void =>{
         setNewEvent({
             ...newEvent,
             title:e.target.value
@@ -138,43 +138,43 @@ export default function Home(){
             </div>
 
                         <Transition.Root show ={showDeleteModal} as={Fragment}>
-                        <Dialog as="div" className="relative z-10" onClose={setShowDelteModal}>
+                        <Dialog as="div" className="tw-relative tw-z-10" onClose={setShowDelteModal}>
                             <Transition.Child
                                 as = {Fragment}
-                                enter = "ease-out duration-300"
-                                enterFrom = "opacity-0"
-                                enterTo="opacity-100"
-                                leave="ease-in duration-200"
-                                leaveFrom="opacity-100"
-                                leaveTo="opacity-0"
+                                enter = "tw-ease-out tw-duration-300"
+                                enterFrom = "tw-opacity-0"
+                                enterTo="tw-opacity-100"
+                                leave="tw-ease-in tw-duration-200"
+                                leaveFrom="tw-opacity-100"
+                                leaveTo="tw-opacity-0"
                             >
-                               <div className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"/>
+                               <div className="tw-fixed tw-inset-0 tw-bg-gray-500 tw-bg-opacity-75 tw-transition-opacity"/>
 
                             </Transition.Child>
 
-                            <div className="fixed inset-0 z-10 overflow-y-auto">
-                                <div className="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
+                            <div className="tw-fixed tw-inset-0 tw-z-10 tw-overflow-y-auto">
+                                <div className="tw-flex min-h-full tw-items-end tw-justify-center tw-p-4 tw-text-center sm:tw-items-center sm: tw-p-0">
                                     <Transition.Child
                                         as = {Fragment}
-                                        enter= "ease-out duration-300"
-                                        enterFrom = "opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
-                                        enterTo="opacity-100 translate-y-0 sm:scale-100"
-                                        leave="ease-in duration-200"
-                                        leaveFrom="opacity-100 translate-y-0 sm:scale-100"
-                                        leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+                                        enter= "tw-ease-out tw-duration-300"
+                                        enterFrom = "tw-opacity-0 tw-translate-y-4 sm:tw-translate-y-0 sm:tw-scale-95"
+                                        enterTo="tw-opacity-100 tw-translate-y-0 sm:tw-scale-100"
+                                        leave="tw-ease-in tw-duration-200"
+                                        leaveFrom="tw-opacity-100 tw-translate-y-0 sm:tw-scale-100"
+                                        leaveTo="tw-opacity-0 tw-translate-y-4 sm:tw-translate-y-0 sm:tw-scale-95"
                                     >
-                                        <Dialog.Panel className = "drelative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg">
-                                            <div className="bg-white px-4 pb-4 pt-5 sm:p-6 sm:pb-4">
-                                                <div className="sm:flex sm:items-start">
-                                                    <div className="mx-auto flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-red-100 sm:mx-0 sm:h-10 sm:w-10">
-                                                        <ExclamationTriangleIcon className="h-6 w-6 text-red-600" aria-hidden="true"/>
+                                        <Dialog.Panel className = "tw-drelative tw-transform tw-overflow-hidden tw-rounded-lg tw-bg-white tw-text-left tw-shadow-xl tw-transition-all sm:tw-my-8 sm:tw-w-full sm:tw-max-w-lg">
+                                            <div className="tw-bg-white tw-px-4 tw-pb-4 tw-pt-5 sm:tw-p-6 sm:tw-pb-4">
+                                                <div className="sm:tw-flex sm:tw-items-start">
+                                                    <div className="tw-mx-auto tw-flex tw-h-12 tw-w-12 tw-flex-shrink-0 tw-items-center tw-justify-center tw-rounded-full tw-bg-red-100 sm:tw-mx-0 sm:tw-h-10 sm:tw-w-10">
+                                                        <ExclamationTriangleIcon className="tw-h-6 tw-w-6 tw-text-red-600" aria-hidden="true"/>
                                                     </div>
-                                                    <div className="mt-3 text-center sm:ml-4 sm:mt-0 sm:text-left">
-                                                        <Dialog.Title as="h3" className="text-base font-semibold leading-6 text-gray-900">
+                                                    <div className="tw-mt-3 tw-text-center sm:tw-ml-4 sm:tw-mt-0 sm:tw-text-left">
+                                                        <Dialog.Title as="h3" className="tw-text-base tw-font-semibold tw-leading-6 tw-text-gray-900">
                                                             DeleteEvent
                                                         </Dialog.Title>
-                                                        <div className="mt-2">
-                                                            <p className="text-sm text-gray-500">
+                                                        <div className="tw-mt-2">
+                                                            <p className="tw-text-sm tw-text-gray-500">
                                                                 Are you sure you want to delete this event?
                                                             </p>
 
@@ -185,13 +185,13 @@ export default function Home(){
                                                 </div>
 
                                             </div>
-                                            <div className="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
-                                                <button type="button" className="inline-flex w-full justify-center rounded-md bg-red-600 px-3 py-2 text-sm 
-                                                font-semibold text-white shadow-sm hover:bg-red-500 sm:ml-3 sm:w-auto" onClick={handleDelete}>
+                                            <div className="tw-bg-gray-50 tw-px-4 tw-py-3 sm:tw-flex sm:tw-flex-row-reverse sm:tw-px-6">
+                                                <button type="button" className="tw-inline-flex tw-w-full tw-justify-center tw-rounded-md tw-bg-red-600 tw-px-3 tw-py-2 tw-text-sm 
+                                                tw-font-semibold tw-text-white tw-shadow-sm hover:tw-bg-red-500 sm:tw-ml-3 sm:tw-w-auto" onClick={handleDelete}>
                                                     Delete
                                                 </button>
-                                                <button type = "button" className="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 
-                                                shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto" onClick={handleCloseModal}>
+                                                <button type = "button" className="tw-mt-3 tw-inline-flex tw-w-full tw-justify-center tw-rounded-md tw-bg-white tw-px-3 tw-py-2 tw-text-sm tw-font-semibold tw-text-gray-900 
+                                                tw-shadow-sm tw-ring-1 tw-ring-inset tw-ring-gray-300 hover:tw-bg-gray-50 sm:tw-mt-0 sm:tw-w-auto" onClick={handleCloseModal}>
                                                     Cancel
                                                 </button>
                                             </div>
@@ -204,53 +204,60 @@ export default function Home(){
                         
 
                                     <Transition.Root show ={showModal} as ={Fragment}>
-                                        <Dialog as="div" className="relative z-10" onClose={setShowModal}>
+                                        <Dialog as="div" className="tw-relative z-10" onClose={setShowModal}>
                                             <Transition.Child 
                                                 as={Fragment}
-                                                enter="ease-out duration-300"
-                                                enterFrom="opacity-0"
-                                                enterTo="opacity-100"
-                                                leave="ease-in duration-200"
-                                                leaveFrom="opacity-100"
-                                                leaveTo="opacity-0"
+                                                enter="tw-ease-out tw-duration-300"
+                                                enterFrom="tw-opacity-0"
+                                                enterTo="tw-opacity-100"
+                                                leave="tw-ease-in tw-duration-200"
+                                                leaveFrom="tw-opacity-100"
+                                                leaveTo="tw-opacity-0"
                                             >
-                                                <div className = "fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"/>
+                                                <div className = "tw-fixed tw-inset-0 tw-bg-gray-500 tw-bg-opacity-75 tw-transition-opacity"/>
                                             </Transition.Child>
 
-                                            <div className="fixed inset-0 z-10 overflow-y-auto">
-                                                <div className="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
+                                            <div className="tw-fixed tw-inset-0 tw-z-10 tw-overflow-y-auto">
+                                                <div className="tw-flex tw-min-h-full tw-items-end tw-justify-center tw-p-4 tw-text-center sm:tw-items-center sm:tw-p-0">
                                                     <Transition.Child
                                                         as={Fragment}
-                                                        enter="ease-out duration-300"
-                                                        enterFrom="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
-                                                        enterTo="opacity-100 translate-y-0 sm:scale-100"
-                                                        leave="ease-in duration-200"
-                                                        leaveFrom="opacity-100 translate-y-0 sm:scale-100"
-                                                        leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+                                                        enter="tw-ease-out tw-duration-300"
+                                                        enterFrom="tw-opacity-0 tw-translate-y-4 sm:tw-translate-y-0 sm:tw-scale-95"
+                                                        enterTo="tw-opacity-100 tw-translate-y-0 sm:tw-scale-100"
+                                                        leave="tw-ease-in tw-duration-200"
+                                                        leaveFrom="tw-opacity-100 tw-translate-y-0 sm:tw-scale-100"
+                                                        leaveTo="tw-opacity-0 tw-translate-y-4 sm:tw-translate-y-0 sm:tw-scale-95"
                                                     >
-                                                        <Dialog.Panel className="relative transform overflow-hidden rounded-lg bg-white px-4 pb-4 pt-5 text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg sm:p-6">
+                                                        <Dialog.Panel className="tw-relative tw-transform tw-overflow-hidden tw-rounded-lg tw-bg-white tw-px-4 tw-pb-4 tw-pt-5 tw-text-left tw-shadow-xl tw-transition-all sm:tw-my-8 sm:tw-w-full sm:tw-max-w-lg sm:tw-p-6">
                                                             <div>
-                                                                <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-green-100">
-                                                                    <CheckIcon className="h-6 w-6 text-green-600" aria-hidden="true" />
+                                                                <div className="tw-mx-auto tw-flex tw-h-12 tw-w-12 tw-items-center tw-justify-center tw-rounded-full tw-bg-green-100">
+                                                                    <CheckIcon className="tw-h-6 tw-w-6 tw-text-green-600" aria-hidden="true" />
                                                                 </div>
-                                                                <div className="mt-3 text-center sm:mt-5">
-                                                                    <Dialog.Title as = "h3" className="dtext-base font-semibold leading-6 text-gray-900">
+                                                                <div className="tw-mt-3 tw-text-center sm:tw-mt-5">
+                                                                    <Dialog.Title as = "h3" className="tw-dtext-base tw-font-semibold tw-leading-6 tw-text-gray-900">
                                                                         Add Event
                                                                     </Dialog.Title>
                                                                     <form action="submit" onSubmit={handleSubmit}>
-                                                                        <div className="mt-2">
-                                                                            <input type="text" name="title" className="block w-full rounded-md border-0 py-1.5 text-gray-900 
-                                                                            shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 
-                                                                            focus:ring-2 
-                                                                            focus:ring-inset focus:ring-violet-600 
-                                                                            sm:text-sm sm:leading-6" value={newEvent.title} onChange={(e) => handleChange(e)} placeholder="Title" />
+                                                                        <div className="tw-mt-2">
+                                                                            <input type="text" name="title" className="tw-block tw-w-full tw-rounded-md tw-border-0 tw-py-1.5 tw-text-gray-900 
+                                                                            tw-shadow-sm tw-ring-1 tw-ring-inset tw-ring-gray-300 placeholder:tw-text-gray-400 
+                                                                            focus:tw-ring-2 
+                                                                            focus:tw-ring-inset focus:tw-ring-violet-600 
+                                                                            sm:tw-text-sm sm:tw-leading-6" value={newEvent.title} onChange={(e) => handleTitleChange(e)} placeholder="Title" />
+
+                                                                            <input type="date"  name="start" className="tw-block tw-w-full tw-rounded-md tw-border-0 tw-py-1.5 tw-text-gray-900 
+                                                                            tw-shadow-sm tw-ring-1 tw-ring-inset tw-ring-gray-300 placeholder:tw-text-gray-400 
+                                                                            focus:tw-ring-2 
+                                                                            focus:tw-ring-inset focus:tw-ring-violet-600 
+                                                                            sm:tw-text-sm sm:tw-leading-6" />
+
                                                                         </div>
-                                                                        <div className="mt-5 sm:mt-6 sm:grid sm:grid-flow-row-dense sm:grid-cols-2 sm:gap-3">
-                                                                            <button type="submit" className="inline-flex w-full justify-center rounded-md bg-violet-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-violet-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-violet-600 sm:col-start-2 disabled:opacity-25" 
+                                                                        <div className="tw-mt-5 sm:tw-mt-6 sm:tw-grid sm:tw-grid-flow-row-dense sm:tw-grid-cols-2 sm:tw-gap-3">
+                                                                            <button type="submit" className="tw-inline-flex tw-w-full tw-justify-center tw-rounded-md tw-bg-violet-600 tw-px-3 tw-py-2 tw-text-sm tw-font-semibold tw-text-white tw-shadow-sm hover:tw-bg-violet-500 focus-visible:tw-outline focus-visible:tw-outline-2 focus-visible:tw-outline-offset-2 focus-visible:tw-outline-violet-600 sm:tw-col-start-2 disabled:tw-opacity-25" 
                                                                             disabled={newEvent.title ===''}>
                                                                                 Create
                                                                             </button>
-                                                                            <button type="button" className="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:col-start-1 sm:mt-0" onClick={handleCloseModal}>
+                                                                            <button type="button" className="tw-mt-3 tw-inline-flex tw-w-full tw-justify-center tw-rounded-md tw-bg-white tw-px-3 tw-py-2 tw-text-sm tw-font-semibold tw-text-gray-900 tw-shadow-sm tw-ring-1 tw-ring-inset tw-ring-gray-300 hover:tw-bg-gray-50 sm:tw-col-start-1 sm:tw-mt-0" onClick={handleCloseModal}>
                                                                                 Cancle
                                                                             </button>
                                                                         </div>

@@ -2,7 +2,9 @@
 module.exports = {
   
   prefix: 'tw-',
-  content: ["./Sched-master/pages/*.{tsx}"],
+  content: ["./pages/**/*.{tsx,js}",
+            "./styles/**/*.{tsx,js}",
+            "./components/**/*.{tsx,js}"],
   theme: {
     extend: {},
   },
