@@ -226,8 +226,6 @@ public class UsersDaoServiceImpl implements UsersDaoService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
         try {
-            System.out.println(userRepository.findByUsername(username).getUsername());
-            System.out.println(userRepository.findByUsername(username).getPassword());
             User user = findUserByUsername(userRepository.findByUsername(username).getUsername());
             if (user == null){
                 throw new UsernameNotFoundException("User Not Found");
