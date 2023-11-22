@@ -91,7 +91,7 @@ textarea {
     /*justify-content: flex-start;*/
 }
 
-tbody{
+.table-body{
 
     overflow-y: auto;
 }
