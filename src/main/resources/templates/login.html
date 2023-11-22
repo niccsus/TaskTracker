@@ -1,25 +1,49 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
 <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles/login.css">
     <title>Please Log In</title>
 </head>
+
 <body>
-<h1>Please Log In</h1>
-<div th:if="${param.error}">
-    Invalid username and password.</div>
-<div th:if="${param.logout}">
-    You have been logged out.</div>
-<form th:action="@{/login}" method="post">
-    <div>
-        <input type="text" name="username" placeholder="Username"/>
-    </div>
-    <div>
-        <input type="password" name="password" placeholder="Password"/>
-    </div>
-    <input type="submit" value="Log in"/>
-</form>
-<form th:action="@{/new-user-registration}" method="get">
-    <input type="submit" value="Register" />
-</form>
+<div class="container">
+    <form id="form">
+        <h1>Log In</h1>
+        <div th:if="${param.error}">
+            Invalid username or password.
+        </div>
+        <div th:if="${param.logout}">
+            You have been logged out.
+        </div>
+        <form th:action="@{/login}" method="post">
+            <div class="input-control">
+                <input type="text" name="username" placeholder="Username"/>
+            </div>
+            <div class="input-control">
+                <input type="password" name="password" placeholder="Password"/>
+            </div>
+            <!-- <input type="submit" value="Log in"/> -->
+            <button type="submit" value="Log in">Login</button>
+            <form th:action="@{/new-user-registration}" method="get">
+
+                <!-- <input type="submit" value="Register" /> -->
+                <button type="submit" value="Register">Register</button>
+
+            </form>
+        </form>
+        <!--   <form th:action="@{/new-user-registration}" method="get">
+
+                  <input type="submit" value="Register" />
+                     <button type="submit" value="Register">Register</button>
+
+           </form> -->
+    </form>
+</div>
 </body>
 </html>
