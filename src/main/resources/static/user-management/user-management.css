@@ -16,6 +16,8 @@ a {
     color: inherit;
 }
 
+
+
 div {
     transition: all 0.3s;
 }
@@ -87,6 +89,10 @@ textarea {
     text-align: left;
     user-select: none;
     /*justify-content: flex-start;*/
+}
+
+tbody{
+    overflow-y: auto;
 }
 
 .user-table-row {
