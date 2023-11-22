@@ -71,6 +71,11 @@ textarea {
     border-collapse: collapse;
 }
 
+.table-body{
+    overflow-y: auto;
+    max-height: 10%;
+}
+
 .drill-table-header {
     width: available;
 

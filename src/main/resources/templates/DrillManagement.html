@@ -112,7 +112,7 @@
                 </tr>
                 </thead>
 
-                <tbody>
+                <tbody class = "table-body">
                 <tr th:each="drill: ${drills}" th:onclick="'updateSelectedDrill(' + ${drill.id} + ');'"
                     class="drill-table-row"
                     th:id="'drill-list-row-' + ${drill.id}">
