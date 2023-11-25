@@ -159,6 +159,9 @@ span {
 }
 
 /*Event Notification*/
+.groupStyles{
+
+}
  .delmodal{
   position: relative;
   z-index: 10;

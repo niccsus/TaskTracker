@@ -1,13 +1,18 @@
 "use client"
 import React from "react"
+import Select from "react-select"
+import {CSSProperties } from 'react';
 import FullCalendar from "@fullcalendar/react"
 import dayGridPlugin from '@fullcalendar/daygrid'
 import interactionPlugin, { Draggable, DropArg} from '@fullcalendar/interaction'
 import timeGridPlugin from '@fullcalendar/timegrid'
+import { useForm } from 'react-hook-form';
 import { useState, useEffect, Fragment } from "react"
 import {Dialog, Transition} from '@headlessui/react'
 import {CheckIcon, ExclamationTriangleIcon} from '@heroicons/react/20/solid'
 import { EventSourceInput } from "@fullcalendar/core"
+import { RankOption, rankOptions, FlightOption, flightOptions, TeamOption, teamOptions, WCOption, wcOptions, GroupedOption, groupedOptions} from "../data/participants"
+import { formatGroupLabel } from "../components/participants"
 
 
 
@@ -24,6 +29,10 @@ export default function Home(){
         {title: 'event 2' ,id: '2'},
         {title: 'event 3' ,id: '3'},
         {title: 'event 4' ,id: '4'},
+    ])
+
+    const[Participants, setParticipants] = useState([
+        ''
     ])
     const [allEvents, setAllEvents] = useState<Event[]>([])
     const[showModal, setShowModal] = useState(false)
@@ -238,18 +247,89 @@ export default function Home(){
                                                                         Add Event
                                                                     </Dialog.Title>
                                                                     <form action="submit" onSubmit={handleSubmit}>
-                                                                        <div className="tw-mt-2">
+                                                                        <div className="tw-mt-2 ">
                                                                             <input type="text" name="title" className="tw-block tw-w-full tw-rounded-md tw-border-0 tw-py-1.5 tw-text-gray-900 
                                                                             tw-shadow-sm tw-ring-1 tw-ring-inset tw-ring-gray-300 placeholder:tw-text-gray-400 
                                                                             focus:tw-ring-2 
                                                                             focus:tw-ring-inset focus:tw-ring-violet-600 
                                                                             sm:tw-text-sm sm:tw-leading-6" value={newEvent.title} onChange={(e) => handleTitleChange(e)} placeholder="Title" />
 
-                                                                            <input type="date"  name="start" className="tw-block tw-w-full tw-rounded-md tw-border-0 tw-py-1.5 tw-text-gray-900 
-                                                                            tw-shadow-sm tw-ring-1 tw-ring-inset tw-ring-gray-300 placeholder:tw-text-gray-400 
-                                                                            focus:tw-ring-2 
-                                                                            focus:tw-ring-inset focus:tw-ring-violet-600 
-                                                                            sm:tw-text-sm sm:tw-leading-6" />
+                                                                            <div className="tw-grid tw-gap-6 tw-mb-4 md: tw-grid-cols-2">
+                                                                                <div>
+                                                                                <label htmlFor="start" className="tw-block  tw-text-left tw-text-sm tw-font-medium tw-text-gray-900 dark:tw-text-white">From</label>
+                                                                                <input type="date" id="start" name="start" className="tw-block tw-w-full tw-rounded-md tw-border-0 tw-py-1.5 tw-text-gray-900 
+                                                                                 tw-shadow-sm tw-ring-1 tw-ring-inset tw-ring-gray-300 placeholder:tw-text-gray-400 
+                                                                                 focus:tw-ring-2 
+                                                                                 focus:tw-ring-inset focus:tw-ring-violet-600 
+                                                                                 sm:tw-text-sm sm:tw-leading-6" />
+                                                                                </div>
+                                                                                <div>
+                                                                                    <input type="time" id="start_time" name="start_time" className="tw-block tw-w-full tw-rounded-md tw-border-0  tw-mt-5 tw-py-1.5 tw-text-gray-900 
+                                                                                    tw-shadow-sm tw-ring-1 tw-ring-inset tw-ring-gray-300 placeholder:tw-text-gray-400 
+                                                                                    focus:tw-ring-2 
+                                                                                    focus:tw-ring-inset focus:tw-ring-violet-600 
+                                                                                    sm:tw-text-sm sm:tw-leading-6" />
+                                                                                </div>
+
+                                                                                <div>
+
+                                                                                <label htmlFor="End" className="tw-block  tw-text-left tw-text-sm tw-font-medium tw-text-gray-900 dark:tw-text-white">To</label>
+                                                                                <input type="date" id="End" name="End" className="tw-block tw-w-full tw-rounded-md tw-border-0 tw-py-1.5 tw-text-gray-900 
+                                                                                 tw-shadow-sm tw-ring-1 tw-ring-inset tw-ring-gray-300 placeholder:tw-text-gray-400 
+                                                                                 focus:tw-ring-2 
+                                                                                 focus:tw-ring-inset focus:tw-ring-violet-600 
+                                                                                 sm:tw-text-sm sm:tw-leading-6" />
+                                                                                </div>
+
+                                                                                <div>
+                                                                                    <input type="time" id="end_time" name="end_time" className="tw-block tw-w-full tw-rounded-md tw-border-0  tw-mt-5 tw-py-1.5 tw-text-gray-900 
+                                                                                    tw-shadow-sm tw-ring-1 tw-ring-inset tw-ring-gray-300 placeholder:tw-text-gray-400 
+                                                                                    focus:tw-ring-2 
+                                                                                    focus:tw-ring-inset focus:tw-ring-violet-600 
+                                                                                    sm:tw-text-sm sm:tw-leading-6" />
+                                                                                </div>
+                                                                            </div>
+                                                                            
+                                                                            <div>
+                                                                            <label htmlFor="location" className="tw-block  tw-text-left tw-text-sm tw-font-medium tw-text-gray-900 dark:tw-text-white">Location</label>
+                                                                            <select name="Location" id="location" className="tw-block tw-w-full tw-rounded-md tw-border-0 tw-py-1.5 tw-text-gray-900
+                                                                            tw-shadow-sm tw-ring-1 tw-ring-inset tw-ring-gray-300 placeholder:tw-text-gray-400
+                                                                            focus:tw-ring-2
+                                                                            focus:tw-ring-inset focus:tw-ring-violet-600
+                                                                            sm:tw-text-sm sm:tw-leading-6"  placeholder="Location">
+                                                                                <option value = "cafeteria">Cafeteria</option>
+                                                                                <option value = "main office">Main Office</option>
+                                                                                <option value = "the oasis">The Oasis</option>
+                                                                            </select>
+                                                                            </div>
+
+                                                                            <div>
+                                                                            <label htmlFor="report to" className="tw-block  tw-text-left tw-text-sm tw-font-medium tw-text-gray-900 dark:tw-text-white">Report To</label>
+                                                                            <select name="report to" id="report to" className="tw-block tw-w-full tw-rounded-md tw-border-0 tw-py-1.5 tw-text-gray-900
+                                                                            tw-shadow-sm tw-ring-1 tw-ring-inset tw-ring-gray-300 placeholder:tw-text-gray-400
+                                                                            focus:tw-ring-2
+                                                                            focus:tw-ring-inset focus:tw-ring-violet-600
+                                                                            sm:tw-text-sm sm:tw-leading-6"  placeholder="Location">
+                                                                                <option value = "Person1">Person1</option>
+                                                                                <option value = "Person2">Person2</option>
+                                                                                <option value = "Person3">Person3</option>
+                                                                            </select>
+                                                                            </div>
+                                                                            <label htmlFor="participants" className="tw-block  tw-text-left tw-text-sm tw-font-medium tw-text-gray-900 dark:tw-text-white">Participants</label>
+                                                                            <Select <RankOption | FlightOption | TeamOption | WCOption, true, GroupedOption>
+                                                                                isMulti
+                                                                                defaultValue={rankOptions[0]} 
+                                                                                options={groupedOptions}
+                                                                                formatGroupLabel={formatGroupLabel}
+                                                                            />
+                                                                            <div>
+                                                                            <label htmlFor="description" className="tw-block  tw-text-left tw-text-sm tw-font-medium tw-text-gray-900 dark:tw-text-white">Description</label> 
+                                                                            <textarea name="postContent" rows={4} cols={40} className="tw-block tw-p-2.5 tw-w-full tw-text-sm tw-text-gray-900 tw-bg-gray-50 tw-rounded-lg tw-border tw-border-gray-300 focus:tw-ring-blue-500 focus:tw-border-blue-500 dark:tw-bg-gray-700 dark:tw-border-gray-600 dark:tw-placeholder-gray-400 dark:tw-text-white dark:tw-focus:ring-blue-500 dark:tw-focus:tw-border-blue-500" />  
+                                                                                
+                                                                            </div>
+
+
+
 
                                                                         </div>
                                                                         <div className="tw-mt-5 sm:tw-mt-6 sm:tw-grid sm:tw-grid-flow-row-dense sm:tw-grid-cols-2 sm:tw-gap-3">
