@@ -4,12 +4,6 @@
     <meta charset="UTF-8">
     <title>New User Registration</title>
 
-    <a href="HomePage.html"><img src="@{/registration/222-ISS-logo.png}"
-     style="width:150px;height:150px;">
-    </a>
-
-    <!--"HomePage.html" to be added later on-->
-
     <link rel="stylesheet" th:href="@{/registration/registration-form.css}">
     <link rel="stylesheet" th:href="@{/registration/chosen-registration.css}">
 
@@ -19,6 +13,8 @@
 </head>
 
 <body class="registration-body">
+<img th:src="@{/registration/222-ISS-logo.png}" alt="Logo" width="150" height="150">
+
 <!--
 <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -97,7 +93,7 @@
         </div>
 
         <div class="registration-input">
-            <label class="registration-field-label" for="officeNumber">Office Phone</label>
+            <label class="registration-field-label" for="officeNumber">Office Number</label>
             <input class="registration-text-input" type="text" id="officeNumber" th:name="officeNumber">
         </div>
 

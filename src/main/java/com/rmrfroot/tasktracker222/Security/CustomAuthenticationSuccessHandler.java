@@ -10,10 +10,12 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Enumeration;
+
 /**
  * CustomAuthenticationSuccessHandler class implements the AuthenticationSuccessHandler interface
  * to handle successful authentication events. This class is responsible for performing actions
- * upon a user's successful login, such as updating the last login the database, checking for
+ * upon a user's successful login, such as updating the last login in the database, checking for
  * temporary password status
  * and redirecting the user to a specified page.
  *
@@ -43,9 +45,9 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
         User user = usersDaoService.findUserByUsername(authentication.getName());
         usersDaoService.updateLastLogin(user);
 
-        /*Here is where we can check for the temporary password and redirect the user to update it*/
+        /*check for the temporary password and redirect the user to update it*/
         //can be null, true, or false
-        System.out.println(user.NeedsPasswordReset());
+
         response.sendRedirect("/drill-schedule-recipient");
     }
 }

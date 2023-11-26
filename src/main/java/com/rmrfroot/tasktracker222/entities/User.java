@@ -139,6 +139,7 @@ public class User implements UserDetails, Comparable {
         this.flight = flight;
         this.teams = teams;
         this.admin = false;
+        this.needsPasswordReset = false;
     }
 
     public int compareTo(User comparedUser){
