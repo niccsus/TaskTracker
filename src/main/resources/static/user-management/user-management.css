@@ -16,6 +16,8 @@ a {
     color: inherit;
 }
 
+
+
 div {
     transition: all 0.3s;
 }
@@ -45,7 +47,8 @@ textarea {
 
 .user-management-main {
     display: flex;
-    overflow: hidden;
+    overflow-x: hidden;
+    overflow-y: auto;
 }
 
 .user-editor-div {
@@ -55,6 +58,9 @@ textarea {
 
 .user-table-div {
     /*width: 50rem !important;*/
+    height: 10px; /* Set your desired height here */
+    overflow-y: auto; /* Enable vertical scrolling if needed */
+
 }
 
 .user-table {
@@ -65,7 +71,7 @@ textarea {
     display: table;
     flex-direction: row;
 
-    table-layout: fixed;
+    /*table-layout: fixed;*/
     border-collapse: collapse;
 }
 
@@ -87,6 +93,11 @@ textarea {
     text-align: left;
     user-select: none;
     /*justify-content: flex-start;*/
+}
+
+.table-body{
+
+    overflow-y: auto;
 }
 
 .user-table-row {
