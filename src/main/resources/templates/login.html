@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org" lang="en">
 <head>
     <style>
         body {
@@ -69,21 +69,20 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
-    <!-- <link rel="stylesheet" th:href="@{/login/login.css}"> -->
+    <link rel="stylesheet" th:href="@{/login/login.css}">
     <title>Please Log In</title>
 </head>
 
 <body>
 <div class="container">
-    <form id="form">
-        <h1>Log In</h1>
-        <div th:if="${param.error}">
-            Invalid username or password.
-        </div>
-        <div th:if="${param.logout}">
-            You have been logged out.
-        </div>
-        <form th:action="@{/login}" method="post">
+        <form id="form" th:action="@{/login}" method="post">
+            <h1>Log In</h1>
+            <div th:if="${param.error}">
+                Invalid username or password.
+            </div>
+            <div th:if="${param.logout}">
+                You have been logged out.
+            </div>
             <div class="input-control">
                 <input type="text" name="username" placeholder="Username"/>
             </div>
@@ -96,16 +95,13 @@
 
             <!-- <input type="submit" value="Register" /> -->
             <button type="submit" value="Register">Register</button>
-
         </form>
-    </form>
     <!--   <form th:action="@{/new-user-registration}" method="get">
 
               <input type="submit" value="Register" />
                  <button type="submit" value="Register">Register</button>
 
        </form> -->
-    </form>
 </div>
 </body>
 </html>

@@ -1,3 +1,6 @@
+@import url("http://www.w3.org/1999/xhtml");
+@import url("https://www.thymeleaf.org");
+
 body {
     background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
     font-family: 'Poppins', sans-serif;
