@@ -10,7 +10,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 
-//import java.time.LocalDate;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.*;
@@ -44,6 +43,9 @@ public class User implements UserDetails, Comparable {
     @Column(name = "admin")
     private boolean admin;
 
+    @Column(name = "needs_password_reset")
+    private Boolean needsPasswordReset;
+
     @Column(name = "approved")
     private boolean approved;
 
@@ -59,8 +61,6 @@ public class User implements UserDetails, Comparable {
     @Column(name = "civ_email")
     private String civilianEmail;
 
-    //@Column(name = "email")
-    //private String email;
 
     @Column(name = "phone_number")
     private String phoneNumber;
@@ -77,8 +77,6 @@ public class User implements UserDetails, Comparable {
     @Column(name = "flight")
     private String flight;
 
-    @Column(name = "lastLogin")
-    private Date updateLastLogin;
 
     @Type(type = "team")
     @Column(name = "teams", columnDefinition = "text[]")
@@ -139,6 +137,7 @@ public class User implements UserDetails, Comparable {
         this.flight = flight;
         this.teams = teams;
         this.admin = false;
+        this.needsPasswordReset = false;
     }
 
     public int compareTo(User comparedUser){
@@ -193,6 +192,7 @@ public class User implements UserDetails, Comparable {
             throw new IllegalArgumentException("Not a valid email");
         }
     }
+
     /**
      * Get military email for user
      * @return user military email
@@ -286,14 +286,19 @@ public class User implements UserDetails, Comparable {
 //        }
 //        this.register_date = register_date;
 //   }
-
     /**
-     * Get user update date
-     * @return users update date
+     * Get user's password status
+     * @return user's rank
      */
-//    public String getUpdate_date() {
-//        return update_date;
-//   }
+    public boolean NeedsPasswordReset() {
+        return needsPasswordReset;
+    }
+    /**
+     * Set User's password status
+     */
+    public void setNeedsPasswordReset(boolean needsPasswordReset) {
+        this.needsPasswordReset = needsPasswordReset;
+    }
 
     /**
      * Set users update date
@@ -574,5 +579,17 @@ public class User implements UserDetails, Comparable {
 
     public String getUserName() {
         return username;
+    }
+    //================================================================================
+    @Column(name = "last_login")
+    private Date lastLogin;
+
+    public void setLastLogin(Date lastLogin) {
+        this.lastLogin = lastLogin;
+    }
+
+
+    public Date getLastLogin() {
+        return lastLogin;
     }
 }

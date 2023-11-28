@@ -1,13 +1,10 @@
 package com.rmrfroot.tasktracker222.controllers;
 
 import com.rmrfroot.tasktracker222.Repository.UserRepository;
-import com.rmrfroot.tasktracker222.configurers.SecurityConfiguration;
 import com.rmrfroot.tasktracker222.entities.Group;
 import com.rmrfroot.tasktracker222.entities.User;
 import com.rmrfroot.tasktracker222.services.UsersDaoService;
-import com.rmrfroot.tasktracker222.validations.ValidateUser;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -15,7 +12,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -23,7 +19,6 @@ import java.security.Principal;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.validation.Valid;
 import java.util.List;
 import java.util.*;
 
@@ -218,7 +213,7 @@ public class UserController {
      */
     @PostMapping(value = "/register-new-user")
     public String saveUser(@ModelAttribute("userAddRequest") User request, Principal principal) {
-        System.out.println("Adding user");
+        //System.out.println("Adding user");
         try {
             if (principal==null) {
                 if (usersDaoService.findUserByUsername(request.getUsername())!=null){
@@ -227,7 +222,6 @@ public class UserController {
                 }
                 System.out.println(request.getCivilianEmail());
                 usersDaoService.registerUserToDatabase(
-                        request.getUserName(),
                         encoder.encode(request.getPassword()),
                         request.getFirstName(),
                         request.getLastName(),
@@ -241,7 +235,7 @@ public class UserController {
                         request.getFlight(),
                         request.getTeams()
                 );
-                System.out.println("New user just added to database: " + request.getFirstName());
+                //System.out.println("New user just added to database: " + request.getFirstName());
             } else {
                 return "redirect:/";
             }
@@ -256,6 +250,7 @@ public class UserController {
     @GetMapping("/pending-approval")
     public String pendingApproval(Principal principal) {
         User u = usersDaoService.findUserByUsername(principal.getName());
+        System.out.println("Pending approval: " + principal.getName());
         try {
             if (u.isApproved()) {
                 return "redirect:/";
@@ -266,10 +261,13 @@ public class UserController {
             return "redirect:/";
         }
     }
-    @GetMapping("/login")
-    public String login() {
-        return "login";
+
+    @PostMapping("/login")
+    public String loginPost(){
+        System.out.println("Bingo");
+        return ("");
     }
+
 
     @GetMapping("/logout")
     public String logout(HttpServletRequest request, HttpServletResponse response) {
@@ -280,5 +278,9 @@ public class UserController {
         }
         return "redirect:/login?logout";
     }
+    @GetMapping("/login")
+    public String login(HttpServletRequest request, HttpServletResponse response) {
+        return "login";}
+
 
 }

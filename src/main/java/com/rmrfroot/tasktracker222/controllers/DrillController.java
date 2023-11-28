@@ -34,7 +34,6 @@ public class DrillController {
     public String drillScheduleRecipientGeneric() {
         DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         String weekOf = dateFormat.format(LocalDateTime.now());
-
         return "redirect:/drill-schedule-recipient/week/" + weekOf;
     }
 

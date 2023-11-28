@@ -64,7 +64,7 @@ public class UsersDAOImpl implements CustomUsersDAO{
     }
     @Override
     public void save(User user) {
-        Session cSession=entityManager.unwrap(Session.class);
+        Session cSession = entityManager.unwrap(Session.class);
         cSession.saveOrUpdate(user);
     }
 

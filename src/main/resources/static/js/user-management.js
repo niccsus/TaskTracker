@@ -114,6 +114,12 @@ function changeToUserSubmit() {
 function changeToUserDelete() {
     document.getElementById("user-delete-button").value = "Delete";
 }
+function handleHelloButtonClick() {
+
+        document.getElementById("user-hello-button").value = "hello";
+
+
+}
 
 function verifyAllFields() {
     if ($("#input-rank").val().length === 0) {
