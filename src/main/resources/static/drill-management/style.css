@@ -54,10 +54,10 @@ body {
     overflow: hidden;
 }
 main {
-    margin-left: 5rem;
     display: flex;
-    /* flex-direction: column; */
+    flex-direction: column;
     height: 100vh;
+    overflow-x: hidden;
     overflow-y: auto;
 }
 
@@ -75,8 +75,13 @@ h3 {
     display: inline;
     color: var(--bg-primary);
 }
+h4 {
+    padding-left: 1rem;
+    color: var(--bg-primary);
+    display: inline;
+}
 
-/* sidebar styling */
+/* sidebar styling
 .sidebar {
     width: 5rem;
     height: 100vh;
@@ -120,16 +125,16 @@ h3 {
     min-width: 2rem;
     margin: 0 1.5rem;
 }
-
-/* sidebar animation */
+*/
+/* sidebar animation
 .sidebar:hover {
     width: 16rem;
 }
 .sidebar:hover .item-text {
     display: block;
 }
-
-/* sidebar item animation */
+*/
+/* sidebar item animation
 .sidebar-item:hover {
     background: var(--bg-secondary);
 }
@@ -139,19 +144,84 @@ h3 {
 .sidebar-item:hover .material-symbols-outlined{
     color: var(--text-secondary);
 }
+*/
+/* Dropdown container */
+.menu-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 5rem;
+    height: 5rem;
+    padding: 0;
+    z-index: 1;
+}
+
+/* The button used to open the dropdown */
+.dropbtn {
+    background: rgba(0, 0, 0, 0);
+    color: black;
+    padding: 0;
+    font-size: 1.5rem;
+    height: 5rem;
+    width: 5rem;
+    border: none;
+    cursor: pointer;
+}
+/* Dropdown button on hover & focus */
+.dropbtn:hover, .dropbtn:focus {
+    background-color: var(--color-info-light);
+}
+
+/* The container <div> - needed to position the dropdown content */
+.dropdown {
+
+}
+/* Dropdown content */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: var(--text-primary);
+    min-width: 160px;
+    box-shadow: 0 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+    color: var(--bg-primary);
+    padding: 0.5rem;
+    text-decoration: none;
+    display: block;
+}
+
+/* Change color on hover */
+.dropdown-content a:hover {
+    background-color: var(--bg-secondary);
+    color: var(--text-secondary);
+}
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+/* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
+.show {display:block;}
 
 /* layout */
+
+.column {
+}
+
 .left {
-    display: flex;
-    flex-direction: column;
-    width: 60rem;
-    height: 100%;
+    height: 20rem;
+    position: relative;
 }
 .top-left {
     background: var(--color-dark-variant);
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
     width: 100%;
     height: 5rem;
     border-bottom: solid var(--text-secondary) 2px;
@@ -159,22 +229,21 @@ h3 {
 .bottom-left {
     background: var(--color-info-light);
     width: 100%;
-    height: calc(100% - 5rem);
-    margin-top: auto;
+    height: 15rem;
+    padding-left: 5rem;
     overflow-y: auto;
+    justify-content: center;
 }
 
 .right {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    height: 100%;
+    padding-left: 0;
+    padding-top: 0;
 }
 .top-right {
     background: var(--color-info-dark);
     display: flex;
-    position: fixed;
     align-items: center;
+    justify-content: center;
     width: 100%;
     height: 5rem;
     border-bottom: solid var(--text-secondary) 2px;
@@ -184,8 +253,9 @@ h3 {
     display: flex;    
     flex-direction: column;
     width: 100%;
-    height: calc(100% - 5rem);
-    margin-top: auto;
+    height: auto;
+    padding-left: 5rem;
+    justify-content: center;
 }
 
 /* week selector */
@@ -197,6 +267,19 @@ h3 {
     transition: 200ms;
 }
 .week-nav-button:hover {
+    background: var(--color-light);
+    color: var(--color-info-light)
+}
+
+.week-nav-button-left {
+    padding-left: 8rem;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    transition: 200ms;
+}
+.week-nav-button-left:hover {
     background: var(--color-light);
     color: var(--color-info-light)
 }
@@ -223,7 +306,7 @@ h3 {
 
 /* calendar */
 .calendarContainer {
-    width: 95%;
+    width: 100%;
     height: 100%;
     margin-left: 2.5%;
     display: flex;
@@ -315,6 +398,30 @@ h3 {
     background-color: var(--color-danger);
     width: 100%;
     height: 100%;
+}
+
+/* Responsive layout for mobile devices */
+@media screen and (max-width: 767px) {
+    /* layout */
+    body::-webkit-scrollbar {
+        width: 0.25rem;
+    }
+    body::-webkit-scrollbar-track {
+        background: #1e1e24;
+    }
+    body::-webkit-scrollbar-thumb {
+        background: #8b95c9;
+    }
+
+    /* main content styling */
+    main {
+        display: flex;
+        flex-direction: column;
+        height: 100vh;
+        overflow-x: auto;
+        overflow-y: auto;
+    }
+
 }
 
 /* TODO: write CSS for login page */
