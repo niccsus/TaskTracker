@@ -136,7 +136,7 @@ class UserControllerTest extends Auth {
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(testUser.getJson());
         MvcResult result = mockMvc.perform(request).andReturn();
-        assertEquals(status().isOk(),result.getResponse().getStatus());
+        assertEquals(stat,result.getResponse().getStatus());
     }
 
     @Test
