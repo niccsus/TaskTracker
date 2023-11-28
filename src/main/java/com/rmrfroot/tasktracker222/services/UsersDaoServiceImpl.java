@@ -13,9 +13,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
-import java.sql.Timestamp;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -121,7 +120,7 @@ public class UsersDaoServiceImpl implements UsersDaoService {
 
     @Transactional
     public void updateLastLogin(User user){
-        user.setLastLogin(new Timestamp(System.currentTimeMillis()));
+        user.setLastLogin(new Date());
         usersDAO.save(user);
     };
 
@@ -202,14 +201,14 @@ public class UsersDaoServiceImpl implements UsersDaoService {
                                        String flight, ArrayList<String> teams)
 
     {
-        String userName = MakeUserName(firstName, lastName);
+        String username = MakeUserName(firstName, lastName);
 
-        User user = new User(userName,password, firstName, lastName, militaryEmail, civilianEmail,
+        User user = new User(username,password, firstName, lastName, militaryEmail, civilianEmail,
                 phoneNumber, officeNumber, rank, workCenter,
                 flight, teams);
 
         if(!isAdminPresent()){
-            System.out.println("No users have the admin attribute yet. User [" + userName + "] has been given " +
+            System.out.println("No users have the admin attribute yet. User [" + username + "] has been given " +
                             "admin attribute to assist with setup.");
             user.setAdmin(true);
             user.setApproved(true);

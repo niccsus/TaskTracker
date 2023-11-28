@@ -10,10 +10,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 
-//import java.time.LocalDate;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.sql.Timestamp;
 import java.util.*;
 import java.util.regex.Pattern;
 
@@ -292,7 +290,7 @@ public class User implements UserDetails, Comparable {
      * Get user's password status
      * @return user's rank
      */
-    public Boolean NeedsPasswordReset() {
+    public boolean NeedsPasswordReset() {
         return needsPasswordReset;
     }
     /**
@@ -584,11 +582,14 @@ public class User implements UserDetails, Comparable {
     }
     //================================================================================
     @Column(name = "last_login")
-    private Timestamp lastLogin;
+    private Date lastLogin;
 
-    public void setLastLogin(Timestamp lastLogin) {
+    public void setLastLogin(Date lastLogin) {
         this.lastLogin = lastLogin;
     }
 
 
+    public Date getLastLogin() {
+        return lastLogin;
+    }
 }

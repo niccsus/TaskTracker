@@ -18,7 +18,7 @@ public interface UserRepository extends JpaRepository<User,Long> {
     @Modifying
     @Transactional
     @Query("UPDATE User u SET u.lastLogin = :date WHERE u.username = :username")
-    void updateLastLogin(@Param("username") String username, @Param("date") Timestamp date);
+    void updateLastLogin(@Param("username") String username, @Param("date") Date date);
 
     @Transactional(readOnly = true)
     User findByUsername(String username);

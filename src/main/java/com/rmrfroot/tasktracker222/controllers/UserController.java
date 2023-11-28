@@ -213,7 +213,7 @@ public class UserController {
      */
     @PostMapping(value = "/register-new-user")
     public String saveUser(@ModelAttribute("userAddRequest") User request, Principal principal) {
-        System.out.println("Adding user");
+        //System.out.println("Adding user");
         try {
             if (principal==null) {
                 if (usersDaoService.findUserByUsername(request.getUsername())!=null){
@@ -235,7 +235,7 @@ public class UserController {
                         request.getFlight(),
                         request.getTeams()
                 );
-                System.out.println("New user just added to database: " + request.getFirstName());
+                //System.out.println("New user just added to database: " + request.getFirstName());
             } else {
                 return "redirect:/";
             }

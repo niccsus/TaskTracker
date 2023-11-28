@@ -47,7 +47,7 @@ public class SecurityConfiguration {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/login", "/new-user-registration",  "/registration/**", "/static/**").permitAll() // Add "/static/**" for static resources
+                .antMatchers("/login", "/new-user-registration", "/register-new-user",  "/registration/**", "/static/**").permitAll() // Add "/static/**" for static resources
                 .antMatchers("/**")
                 .authenticated()
                 .and()
