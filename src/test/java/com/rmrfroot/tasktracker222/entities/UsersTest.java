@@ -5,6 +5,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -154,7 +155,7 @@ class UsersTest {
 
     @Test
     void setTeams(){
-        ArrayList<String> newTeamList=new ArrayList<String>();
+        ArrayList<String> newTeamList=new ArrayList<String>(Arrays.asList("222All"));
         user.setTeams(newTeamList);
         assertEquals(newTeamList,user.getTeams());
     }
