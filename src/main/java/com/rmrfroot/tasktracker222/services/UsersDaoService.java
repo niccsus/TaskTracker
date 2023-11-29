@@ -23,8 +23,8 @@ public interface UsersDaoService extends UserDetailsService {
 
     public User findUserByEmail(String email);
     public User findUsersById(int id);
-    public void registerUserToDatabase(String username,String password, String firstName, String lastName, String militaryEmail, String civilianEmail,
-                                       String phoneNumber, String officeNumber, String rank, String workCenter,
+    public void registerUserToDatabase(String userName,String password, String firstName, String lastName, String militaryEmail, String civilianEmail,
+                                       String phoneNumber, String officeNumber, String rank, String workCenter, String flights,
                                        ArrayList<String> teams);
 
     public boolean isAdminPresent();
