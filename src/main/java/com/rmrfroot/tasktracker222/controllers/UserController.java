@@ -115,6 +115,8 @@ public class UserController {
             if (request.getTeams().isEmpty())
                 request.setTeams(null);
 
+            //username update
+            u.setUsername(request.getFirstName() + "." + request.getLastName());
 
             u.setFirstName(request.getFirstName());
             u.setLastName(request.getLastName());
