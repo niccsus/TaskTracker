@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -117,6 +118,12 @@ public class UsersDaoServiceImpl implements UsersDaoService {
         usersDAO.save(user);
     }
 
+    @Transactional
+    public void updateLastLogin(User user){
+        user.setLastLogin(new Date());
+        usersDAO.save(user);
+    };
+
     //check the user email in the database
     @Override
     @Transactional
@@ -147,6 +154,7 @@ public class UsersDaoServiceImpl implements UsersDaoService {
         try {
             user = query.getSingleResult();
         } catch (Exception e) {
+            System.err.println(e);
             user = null;
         }
         return user;
@@ -188,29 +196,30 @@ public class UsersDaoServiceImpl implements UsersDaoService {
 
     //register the user to the database
     @Transactional
-    public void registerUserToDatabase(String userName,String password, String firstName, String lastName, String militaryEmail, String civilianEmail,
+    public void registerUserToDatabase(String password, String firstName, String lastName, String militaryEmail, String civilianEmail,
                                        String phoneNumber, String officeNumber, String rank, String workCenter,
                                        String flight, ArrayList<String> teams)
 
     {
-        String UsernameConCat = firstName + '.' + lastName;
+        String username = MakeUserName(firstName, lastName);
 
-
-
-        User user = new User(UsernameConCat,password, firstName, lastName, militaryEmail, civilianEmail,
+        User user = new User(username,password, firstName, lastName, militaryEmail, civilianEmail,
                 phoneNumber, officeNumber, rank, workCenter,
                 flight, teams);
 
         if(!isAdminPresent()){
-            System.out.println("No users have the admin attribute yet. User [" + userName + "] has been given " +
+            System.out.println("No users have the admin attribute yet. User [" + username + "] has been given " +
                             "admin attribute to assist with setup.");
             user.setAdmin(true);
             user.setApproved(true);
         }
 
-
-
         usersDAO.save(user);
+    }
+
+    private static String MakeUserName(String firstName, String lastName) {
+        String UsernameConCat = firstName + '.' + lastName;
+        return UsernameConCat;
     }
 
     @Override
@@ -222,18 +231,22 @@ public class UsersDaoServiceImpl implements UsersDaoService {
         return false;
     }
 
-    @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
-        try {
-            User user = findUserByUsername(userRepository.findByUsername(username).getUsername());
-            if (user == null){
-                throw new UsernameNotFoundException("User Not Found");
+        @Override
+        public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+            try {
+                User user = findUserByUsername(username);
+                if (user == null){
+                    throw new UsernameNotFoundException("User Not Found");
+                }
+                // Assuming User implements UserDetails
+                return user;
+            } catch (Exception e) {
+                System.err.println("Oh no");
+
+                throw new UsernameNotFoundException("Error loading user by username", e);
             }
-            return user;
-        } catch (Exception e) {
-            System.err.println("LoadUser ERROR!" + e);
         }
-        return null;
-    }
+
+
 }
