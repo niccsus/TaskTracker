@@ -223,3 +223,14 @@ textarea {
     background-color: #b93f3f;
     font-size: large;
 }
+
+@media screen and (max-width: 767px) {
+
+    .user-management-main {
+        display: flex;
+        flex-direction: column;
+        height: 100vh;
+        overflow-x: auto;
+        overflow-y: auto;
+    }
+}

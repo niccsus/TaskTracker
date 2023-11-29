@@ -2,6 +2,9 @@
 body {
     min-height: 100%;
     margin: 0;
+    width: 100%;
+    overflow-y: hidden;
+    overflow-x: hidden;
 }
 
 i {
@@ -49,7 +52,6 @@ textarea {
     height: 100vh;
     overflow-x: hidden;
     overflow-y: auto;
-    width: 100%;
 }
 
 .drill-editor-div {
@@ -206,3 +208,13 @@ textarea {
     font-size: large;
 }
 
+@media screen and (max-width: 767px) {
+
+    .drill-management-main {
+        display: flex;
+        flex-direction: column;
+        height: 100vh;
+        overflow-x: hidden;
+        overflow-y: auto;
+    }
+}
