@@ -5,12 +5,12 @@ import com.rmrfroot.tasktracker222.services.UsersDaoServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+import org.springframework.stereotype.Service;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.Enumeration;
 
 /**
  * CustomAuthenticationSuccessHandler class implements the AuthenticationSuccessHandler interface
@@ -29,6 +29,7 @@ import java.util.Enumeration;
  * @author Nicholas Burt
  * @since 22-Nov-2023
  */
+@Service
 public class CustomAuthenticationSuccessHandler implements AuthenticationSuccessHandler {
 
     @Autowired
@@ -41,13 +42,12 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
             Authentication authentication
     ) throws IOException, ServletException {
         //here is what is done after a successfully logging
-        //update last login time
         User user = usersDaoService.findUserByUsername(authentication.getName());
         usersDaoService.updateLastLogin(user);
+        if (user.needsPasswordReset() != null && user.needsPasswordReset()){
+            response.sendRedirect("/temp-password");
+        }else{
+            response.sendRedirect("/drill-schedule-recipient");
 
-        /*check for the temporary password and redirect the user to update it*/
-        //can be null, true, or false
-
-        response.sendRedirect("/drill-schedule-recipient");
-    }
-}
+        }
+}}

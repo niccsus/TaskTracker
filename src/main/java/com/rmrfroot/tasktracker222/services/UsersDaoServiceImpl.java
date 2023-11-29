@@ -34,7 +34,6 @@ public class UsersDaoServiceImpl implements UsersDaoService {
     @Autowired
     private UsersDao usersDAO;
     @Autowired
-
     private EntityManager entityManager;
     @Autowired
     private UserRepository userRepository;
@@ -129,7 +128,7 @@ public class UsersDaoServiceImpl implements UsersDaoService {
     @Transactional
     public Boolean hasUserData(String email) {
         Session cSession = entityManager.unwrap(Session.class);
-        Query<User> query = cSession.createQuery("from User where email=:email", User.class);
+        Query<User> query = cSession.createQuery("from User where civilianEmail=:email", User.class);
         query.setParameter("email", email);
         Boolean check = false;
         List<User> list = query.getResultList();
@@ -145,16 +144,14 @@ public class UsersDaoServiceImpl implements UsersDaoService {
 
     //find the user by Username from the database
     @Override
-    public User findUserByUsername(String username) {
+    public User findUserByUsername(String userName) {
         Session cSession = entityManager.unwrap(Session.class);
-        Query<User> query = cSession.createQuery("from User where userName=:username", User.class);
-        query.setParameter("username", username);
-
+        Query<User> query = cSession.createQuery("from User where username=:userName", User.class);
+        query.setParameter("userName", userName);
         User user;
         try {
             user = query.getSingleResult();
         } catch (Exception e) {
-            System.err.println(e);
             user = null;
         }
         return user;
@@ -165,7 +162,7 @@ public class UsersDaoServiceImpl implements UsersDaoService {
     @Transactional
     public User findUserByEmail(String email) {
         Session cSession = entityManager.unwrap(Session.class);
-        Query<User> query = cSession.createQuery("from User where email=:email", User.class);
+        Query<User> query = cSession.createQuery("from User where civilianEmail=:email", User.class);
         query.setParameter("email", email);
 
         User user = null;
@@ -196,19 +193,17 @@ public class UsersDaoServiceImpl implements UsersDaoService {
 
     //register the user to the database
     @Transactional
-    public void registerUserToDatabase(String password, String firstName, String lastName, String militaryEmail, String civilianEmail,
+    public void registerUserToDatabase(String userName, String password, String firstName, String lastName, String militaryEmail, String civilianEmail,
                                        String phoneNumber, String officeNumber, String rank, String workCenter,
                                        String flight, ArrayList<String> teams)
 
     {
-        String username = MakeUserName(firstName, lastName);
-
-        User user = new User(username,password, firstName, lastName, militaryEmail, civilianEmail,
+        User user = new User(userName,password, firstName, lastName, militaryEmail, civilianEmail,
                 phoneNumber, officeNumber, rank, workCenter,
                 flight, teams);
 
         if(!isAdminPresent()){
-            System.out.println("No users have the admin attribute yet. User [" + username + "] has been given " +
+            System.out.println("No users have the admin attribute yet. User [" + userName + "] has been given " +
                             "admin attribute to assist with setup.");
             user.setAdmin(true);
             user.setApproved(true);
@@ -239,11 +234,8 @@ public class UsersDaoServiceImpl implements UsersDaoService {
                 if (user == null){
                     throw new UsernameNotFoundException("User Not Found");
                 }
-                // Assuming User implements UserDetails
                 return user;
             } catch (Exception e) {
-                System.err.println("Oh no");
-
                 throw new UsernameNotFoundException("Error loading user by username", e);
             }
         }

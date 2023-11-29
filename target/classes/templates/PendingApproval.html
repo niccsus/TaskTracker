@@ -1,9 +1,8 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>New User Registration</title>
-
+    <title>Pending Approval</title>
 
     <link rel="stylesheet" th:href="@{/registration/registration-form.css}">
     <link rel="stylesheet" th:href="@{/registration/chosen-registration.css}">
@@ -16,8 +15,13 @@
 
 <div class="registration-div">
     <h1 class="registration-header">Your account is pending approval.</h1>
-
     <span class="registration-field-label">Your organization must approve your registration before you will be able to access this application.</span>
+
+    <!-- Add a button to submit to /login -->
+    <form th:action="@{/login}" method="get">
+        <button type="submit" class="registration-submit">Login</button>
+    </form>
 </div>
+
 </body>
 </html>

@@ -13,7 +13,7 @@
 </head>
 
 <body class="registration-body">
-<img th:src="@{/registration/222-ISS-logo.png}" alt="Logo" width="150" height="150">
+
 
 <!--
 <svg
@@ -61,6 +61,8 @@
             <input class="registration-test-input" type="text" id="username" th:name="username" required>
         </div>
         -->
+        <div th:if="${param.userAlreadyExists}">
+            *User Already Exists</div>
 
         <div class="registration-input">
             <label class="registration-field-label registration-field-required" for="password">Password</label>
@@ -134,6 +136,7 @@
 
 
 </div>
+<img th:src="@{/registration/222-ISS-logo.png}" alt="Logo" width="150" height="150">
 
 <script type="text/javascript">
     $(document).ready(function () {
