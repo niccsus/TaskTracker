@@ -1,7 +1,8 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Event Management</title>
     <link rel="stylesheet" th:href="@{/drill-management/drill-management.css}">
     <link rel="stylesheet" th:href="@{/drill-management/style.css}">
@@ -23,8 +24,9 @@
 </head>
 
 
-<body class="body-container" onload="selectInitialDrill();">
 
+<body onload="selectInitialDrill();">
+<!--
 <aside class="sidebar">
     <ul class="sidebar-list">
         <li class="sidebar-item">
@@ -59,6 +61,19 @@
         </li>
     </ul>
 </aside>
+-->
+
+<div class="menu-container">
+    <div class="dropdown">
+        <button onclick = "myFunction()" class="dropbtn">&#9776;</button>
+        <div id="myDropdown" class="dropdown-content">
+            <a href="/drill-schedule-recipient/">My Events</a>
+            <a href="/drill-schedule-manager">Manage Events</a>
+            <a href="/user-manager">Manage Users</a>
+            <a href="/logout">Log Out</a>
+        </div>
+    </div>
+</div>
 
 <main class="drill-management-main">
 
@@ -66,7 +81,7 @@
 
     <div class="left">
         <div class="top-left">
-            <a id="last-week" class="week-nav-button">
+            <a id="last-week" class="week-nav-button-left">
                 <span class="material-symbols-outlined">chevron_left</span>
                 <script th:inline="javascript">
                     let selectedDay = new Date(/*[[${selectedDate}]]*/);
@@ -368,7 +383,7 @@
             });
         </script>
     </div>
-    >
+
 </main>
 </body>
 </html>

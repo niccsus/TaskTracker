@@ -290,13 +290,13 @@ public class User implements UserDetails, Comparable {
      * Get user's password status
      * @return user's rank
      */
-    public boolean NeedsPasswordReset() {
+    public Boolean needsPasswordReset() {
         return needsPasswordReset;
     }
     /**
      * Set User's password status
      */
-    public void setNeedsPasswordReset(boolean needsPasswordReset) {
+    public void setNeedsPasswordReset(Boolean needsPasswordReset) {
         this.needsPasswordReset = needsPasswordReset;
     }
 

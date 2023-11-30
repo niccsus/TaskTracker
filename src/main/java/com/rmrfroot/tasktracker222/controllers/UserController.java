@@ -35,14 +35,14 @@ public class UserController {
     private UsersDaoService usersDaoService;
     @Autowired
     private UserRepository userRepository;
-    //@Autowired
-    // PoolClientInterface poolClientInterface;
 
-    private PasswordEncoder PasswordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
+    @Autowired
+    PasswordEncoder encoder;
+   // private PasswordEncoder PasswordEncoder() {
+//        return new BCryptPasswordEncoder();
+//    }
 
-    PasswordEncoder encoder=PasswordEncoder();
+    //PasswordEncoder encoder= PasswordEncoder();
 
     public UserController(UsersDaoService usersDaoService) {
         super();
@@ -115,6 +115,8 @@ public class UserController {
             if (request.getTeams().isEmpty())
                 request.setTeams(null);
 
+            //username update
+            u.setUsername(request.getFirstName() + "." + request.getLastName());
 
             u.setFirstName(request.getFirstName());
             u.setLastName(request.getLastName());
@@ -208,26 +210,24 @@ public class UserController {
      * Add a user to the database
      *
      * @param request  user object holding the new user's information
-     * @param principal    user's credentials
+     * @param authentication    user's credentials
      * @return to access control
      */
     @PostMapping(value = "/register-new-user")
-    public String saveUser(@ModelAttribute("userAddRequest") User request, Principal principal) {
-        //System.out.println("Adding user");
+    public String saveUser(@ModelAttribute("userAddRequest") User request, Authentication authentication, Model model) {
+        request.setUsername(request.getFirstName() + "." + request.getLastName());
         try {
-            if (principal==null) {
-                if (usersDaoService.findUserByUsername(request.getUsername())!=null){
-                    System.out.println("User already exists with that username");
-                    return "redirect:/new-user-registration";
+            if (authentication == null || !authentication.isAuthenticated()) {
+                if (usersDaoService.findUserByUsername(request.getUsername()) != null) {
+                    return "redirect:/new-user-registration?userAlreadyExists";
                 }
-                System.out.println(request.getCivilianEmail());
                 usersDaoService.registerUserToDatabase(
+                        request.getUsername(),
                         encoder.encode(request.getPassword()),
                         request.getFirstName(),
                         request.getLastName(),
                         request.getMilitaryEmail(),
                         request.getCivilianEmail(),
-                        //request.getEmail(),
                         request.getPhoneNumber(),
                         request.getOfficeNumber(),
                         request.getRank(),
@@ -235,8 +235,9 @@ public class UserController {
                         request.getFlight(),
                         request.getTeams()
                 );
-                //System.out.println("New user just added to database: " + request.getFirstName());
+                return "PendingApproval";
             } else {
+                // The user is already authenticated, redirect to home or some other page
                 return "redirect:/";
             }
         } catch (Exception e) {
@@ -244,24 +245,31 @@ public class UserController {
             e.printStackTrace();
             return "redirect:/error";
         }
-        return "redirect:/";
     }
+
 
     @GetMapping("/pending-approval")
-    public String pendingApproval(Principal principal) {
-        User u = usersDaoService.findUserByUsername(principal.getName());
-        System.out.println("Pending approval: " + principal.getName());
-        try {
-            if (u.isApproved()) {
-                return "redirect:/";
-            } else {
-                return "PendingApproval";
-            }
-        } catch (Exception e) {
-            return "redirect:/";
-        }
+    public String pendingApproval(@ModelAttribute("userAddRequest") User request, Authentication authentication) {
+        //User u = usersDaoService.findUserByUsername(authentication.getName());
+        System.out.println("Pending approval: " + request.getFirstName() + "." + request.getLastName());
+//        try {
+//            if (u.isApproved()) {
+//                return "redirect:/";
+//            } else {
+//
+//                return "PendingApproval";
+//            }
+//        } catch (Exception e) {
+//            return "redirect:/";
+//        }
+        return "PendingApproval";
     }
 
+    //==========
+    @GetMapping("/temp-password")
+    public String tempPassword(){
+        return("TemporaryPassword");
+    }
     @PostMapping("/login")
     public String loginPost(){
         System.out.println("Bingo");

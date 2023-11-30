@@ -19,7 +19,7 @@
 </head>
 
 <body onload="selectInitialDrill();">
-    <!-- sidebar -->
+    <!-- sidebar
     <aside class="sidebar">
         <ul class="sidebar-list">
             <li class="sidebar-item">
@@ -54,13 +54,24 @@
             </li>
         </ul>
     </aside>
-
+    -->
+    <div class="menu-container">
+        <div class="dropdown">
+            <button onclick = "myFunction()" class="dropbtn">&#9776;</button>
+            <div id="myDropdown" class="dropdown-content">
+                <a href="/drill-schedule-recipient/">My Events</a>
+                <a th:if="${isAdmin == true}" href="/drill-schedule-manager">Manage Events</a>
+                <a th:if="${isAdmin == true}" href="/user-manager">Manage Users</a>
+                <a href="/logout">Log Out</a>
+            </div>
+        </div>
+    </div>
     <!-- content -->
     <main>
         <!-- calendar -->
         <div class="left">
             <div class="top-left">
-                <a id="last-week" class="week-nav-button">
+                <a id="last-week" class="week-nav-button-left">
                     <span class="material-symbols-outlined">chevron_left</span>
                     <script th:inline="javascript">
                         let selectedDay = new Date(/*[[${selectedDate}]]*/);
