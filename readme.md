@@ -7,7 +7,7 @@
 *   Soua Chang: schang@csus.edu
 *   Nicholas Burt: nburt@csus.edu
 *   Christopher Gonsalves: cgonsalves2@csus.edu
-*   Dante Rodriguez: danterodruguez@csus.edu
+*   Dante Rodriguez: danterodriguez@csus.edu
 *   Steven Trinh: steventrinh@csus.edu
 *   Andrew Xiong: andrewxiong@csus.edu
 
