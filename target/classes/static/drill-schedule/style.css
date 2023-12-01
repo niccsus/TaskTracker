@@ -14,7 +14,6 @@
     --color-warning: #ffbb55;
     --color-white: #fff;
     --color-info-dark: #7d8da1;
-    --color-info-light: #d6edff;
     --color-dark: #636949;
     --color-light: rgba(132, 139, 200, 0.18);
     --color-primary-variant: #111e88;
@@ -89,7 +88,7 @@ h4 {
     position: fixed;
     background-color: var(--bg-primary);
     transition: width 200ms ease;
-    z-index: 1;
+    z-index: 3;
 }
 .sidebar-list {
     list-style: none;
@@ -276,10 +275,34 @@ h4 {
 
 /* calendar */
 .calendarContainer {
-    width: 90%;
+    width: auto;
     height: 100%;
-    margin-left: 2.5%;
+    margin: 2.5%;
     display: flex;
+}
+
+.fc{
+    width:100%
+}
+.calendar_container{
+  flex: auto;
+  min-height: 100vh;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 24px;
+  z-index: 2;
+}
+.fc-day-grid-event > .fc-content {
+    white-space: normal;
+    text-overflow: ellipsis;
+    max-height:20px;
+}
+.fc-day-grid-event > .fc-content:hover {
+    max-height:none!important;
+}
+.fc-event{
+    min-height:30px;
 }
 
 .timeCol {

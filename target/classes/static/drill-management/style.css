@@ -58,6 +58,7 @@ main {
     display: flex;
     /* flex-direction: column; */
     height: 100vh;
+    overflow-y: auto;
 }
 
 /* text styling */
@@ -160,6 +161,7 @@ h3 {
     width: 100%;
     height: calc(100% - 5rem);
     margin-top: auto;
+    overflow-y: auto;
 }
 
 .right {

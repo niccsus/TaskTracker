@@ -180,6 +180,40 @@ public class DrillDaoImpl implements DrillDaoService {
         return out;
     }
 
+    public List<Drill> findDrillsByID(int id) {
+        List<Drill> allDrills = drillDAO.findAll();
+        List<Drill> out = new ArrayList<>();
+
+
+        User user = usersDaoService.findUsersById(id);
+
+        for (Drill drill : allDrills) {
+            List<String> participants = drill.getParticipants();
+
+
+            if (participants.contains(Integer.toString(user.getId()))) {
+                out.add(drill);
+            } else {
+                List<String> commonGroups = new ArrayList<>(drill.getParticipants());
+
+                List<String> userGroups = new ArrayList<>();
+                userGroups.add(user.getRank());
+                userGroups.add(user.getFlight());
+                userGroups.add(user.getWorkCenter());
+                userGroups.addAll(user.getTeams());
+
+                commonGroups.retainAll(userGroups);
+
+                if (!commonGroups.isEmpty()) {
+                    fixDrillTimeDates(drill);
+                    out.add(drill);
+                }
+            }
+        }
+
+        return out;
+    }
+
     public LocalDate findStartOfWeek(String date) {
         LocalDate originalDate = convertStringToLocalDate(date);
         LocalDate startDate = originalDate.with(TemporalAdjusters.previousOrSame(DayOfWeek.MONDAY));
@@ -227,6 +261,14 @@ public class DrillDaoImpl implements DrillDaoService {
 
     public LocalDate convertDateToLocalDate(Date date) {
         return date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+    }
+    public void fixDrillTimeDates(Drill drill){
+        Date brokenStartTime = drill.getStartTime();
+        Date brokenEndTime = drill.getEndTime();
+
+        drill.setStartTime(combineDateAndTime(drill.getDate(),brokenStartTime));
+        drill.setEndTime(combineDateAndTime(drill.getDate(),brokenEndTime));
+
     }
 
     public Date combineDateAndTime(Date date, Date timeToFix) {

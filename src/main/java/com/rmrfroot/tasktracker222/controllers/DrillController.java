@@ -82,6 +82,9 @@ public class DrillController {
         List<Drill> allDrills = drillDaoService.findDrillsInWeekOfDateByID(week,
                 usersDaoService.findUserByUsername(principal.getName()).getId());
 
+
+        List<Drill> calendarDrills = drillDaoService.findDrillsByID(usersDaoService.findUserByUsername(principal.getName()).getId());
+
         /*
             Sort drills by date + start time
             See compareTo() implementation in Drill to modify this behavior
@@ -98,6 +101,7 @@ public class DrillController {
                 drillDaoService.getDaysOfWeekWithConcurrency(concurrencyMap));
         model.addAttribute("concurrencyMatrix", concurrencyMap.values());
 
+        model.addAttribute("calendar_drills", calendarDrills);
         model.addAttribute("drills", allDrills);
         model.addAttribute("users", usersDaoService.findAll());
         model.addAttribute("datesOfWeek", drillDaoService.findDatesForScheduleByDate(week));

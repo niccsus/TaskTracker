@@ -26,6 +26,7 @@ public interface DrillDaoService {
     public List<Drill> findDrillsInWeekOfDate(String date);
 
     public List<Drill> findDrillsInWeekOfDateByID(String date, int id);
+    public List<Drill> findDrillsByID(int id);
 
     public LocalDate findStartOfWeek(String date);
 
