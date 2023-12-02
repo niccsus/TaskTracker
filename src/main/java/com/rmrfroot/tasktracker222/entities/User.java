@@ -464,13 +464,12 @@ public class User implements UserDetails, Comparable {
      */
     public void setTeams(ArrayList<String> teams) {
         /** check to see if user is already part of 222ALL
-         * users should all be automatically be assigned 222ALL
+         * users should all be automatically assigned 222ALL
+         * that way when drills are assigned 222ALL they will be visible to everyone regardless of teams
          */
         if(!teams.contains("222ALL")){
             teams.add("222ALL");
         }
-        this.teams = teams;
-
         this.teams = teams;
     }
 
