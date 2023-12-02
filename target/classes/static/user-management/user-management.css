@@ -16,6 +16,8 @@ a {
     color: inherit;
 }
 
+
+
 div {
     transition: all 0.3s;
 }
@@ -37,6 +39,7 @@ input {
     font-family: Poppins, serif;
 }
 
+
 textarea {
     resize: none;
 
@@ -45,48 +48,52 @@ textarea {
 
 .user-management-main {
     display: flex;
-    overflow: hidden;
+    flex-direction: column;
+    height: 100vh;
+    overflow-x: hidden;
+    overflow-y: auto;
 }
 
 .user-editor-div {
-    padding-left: 10px;
+    padding-left: 0;
+    padding-top: 0;
 }
 
 
 .user-table-div {
-    /*width: 50rem !important;*/
+
+    height: 20rem;
+    position: relative;
 }
 
 .user-table {
-    width: 100%;
-    /*margin: 10px;*/
+    width: 85%;
+
+    height: 50px;
     padding: 10px;
 
     display: table;
     flex-direction: row;
 
-    table-layout: fixed;
+
     border-collapse: collapse;
 }
 
 .user-table-header {
-    width: available;
-
-    /*display: flex;*/
-    /*flex-direction: column;*/
-    /*justify-content: flex-start;*/
-    /*flex-grow: 1;*/
 
     text-align: left;
 }
 
 .user-table-header-entry {
-    /*display: flex;*/
     padding: 5px 5px 5px 10px;
 
     text-align: left;
     user-select: none;
-    /*justify-content: flex-start;*/
+}
+
+.table-body{
+
+    overflow-y: auto;
 }
 
 .user-table-row {
@@ -155,7 +162,13 @@ textarea {
     word-wrap: break-word;
 
     text-align: left;
+
     padding-right: .25vw;
+    font-size: large;
+}
+
+.user-management-entry-message {
+    font-size: medium;
 }
 
 .user-management-value-cell {
@@ -185,10 +198,13 @@ textarea {
 .user-edit-button-div {
     display: flex;
     flex-direction: row;
+    justify-content: center;
+    margin-left: -5rem;
 }
 
 .user-edit-submit {
     width: 20rem;
+    height: 3rem;
     margin-top: 20px;
 
     display: flex;
@@ -196,7 +212,7 @@ textarea {
     align-content: center;
 
     color: white;
-    font-size: 4vh;
+    font-size: large;
     background-color: #AEE583;
     border: none;
     border-radius: 4px;
@@ -205,4 +221,17 @@ textarea {
 .user-edit-delete {
     margin-left: 2rem;
     background-color: #b93f3f;
+    font-size: large;
+}
+
+@media screen and (max-width: 767px) {
+
+    .user-management-main {
+        display: flex;
+        flex-direction: column;
+        height: 100vh;
+        overflow-x: auto;
+        overflow-y: auto;
+    }
+
 }
