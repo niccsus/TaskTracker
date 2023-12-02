@@ -463,6 +463,14 @@ public class User implements UserDetails, Comparable {
      * @param teams arraylist containing user's team list
      */
     public void setTeams(ArrayList<String> teams) {
+        /** check to see if user is already part of 222ALL
+         * users should all be automatically be assigned 222ALL
+         */
+        if(!teams.contains("222ALL")){
+            teams.add("222ALL");
+        }
+        this.teams = teams;
+
         this.teams = teams;
     }
 
