@@ -33,17 +33,17 @@ class UsersTest {
 
 
     User user = new User(username, encoder.encode(password),fname, lname,milEmail,civEmail,phoneNumber,officeNumber, rank, workCenter,
-          flight, teamList);
+            flight, teamList);
     @Test
-    void getId() {
+    void getUserId() {
         user.setId(id);
         assertEquals(id,user.getId());
     }
 
     @Test
-    void setId() {
-        user.setId(222);
-        assertEquals(222,user.getId());
+    void setUserId() {
+        user.setId(5432);
+        assertEquals(5432,user.getId());
     }
 
     @Test
@@ -116,45 +116,45 @@ class UsersTest {
     }
 
     @Test
-    void getRank() {
+    void getUserRank() {
         assertEquals(rank,user.getRank());
     }
 
     @Test
-    void setRank() {
-        user.setRank("Major");
-        assertEquals("Major",user.getRank());
+    void setUserRank() {
+        user.setRank("General");
+        assertEquals("General",user.getRank());
     }
 
     @Test
-    void getWorkCenter() {
+    void getUserWorkCenter() {
         assertEquals(workCenter,user.getWorkCenter());
     }
 
     @Test
-    void setWorkCenter() {
-        user.setWorkCenter("Other Center");
-        assertEquals("Other Center",user.getWorkCenter());
+    void setUserWorkCenter() {
+        user.setWorkCenter("Cool Center");
+        assertEquals("Cool Center",user.getWorkCenter());
     }
 
     @Test
-    void getFlight() {
+    void getUserFlight() {
         assertEquals(flight,user.getFlight());
     }
 
     @Test
-    void setFlight() {
-        user.setFlight("Other Flight");
-        assertEquals("Other Flight",user.getFlight());
+    void setUserFlight() {
+        user.setFlight("Elite Flight");
+        assertEquals("Elite Flight",user.getFlight());
     }
 
     @Test
-    void getTeams(){
+    void getUsersTeams(){
         assertEquals(teamList,user.getTeams());
     }
 
     @Test
-    void setTeams(){
+    void setUsersTeams(){
         ArrayList<String> newTeamList=new ArrayList<String>(Arrays.asList("222All"));
         user.setTeams(newTeamList);
         assertEquals(newTeamList,user.getTeams());
