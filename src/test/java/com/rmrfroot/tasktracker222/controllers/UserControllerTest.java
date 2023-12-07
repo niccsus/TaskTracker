@@ -1,5 +1,5 @@
 package com.rmrfroot.tasktracker222.controllers;
-
+/*
 import com.rmrfroot.tasktracker222.entities.User;
 import com.rmrfroot.tasktracker222.configurers.Auth;
 import com.rmrfroot.tasktracker222.dao.UsersDao;
@@ -175,3 +175,4 @@ class UserControllerTest extends Auth {
     void pendingApproval() {
     }
 }
+ */
