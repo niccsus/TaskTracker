@@ -156,36 +156,73 @@ public class ValidateDrillTest {
     }
 
 
-//    public String getOfficer_email() {
-//        return officer_email;
-//    }
-//
-//    public void setOfficer_email(String officer_email) {
-//        this.officer_email = officer_email;
-//    }
-//
-//    public String getNote() {
-//        return note;
-//    }
-//
-//    public void setNote(String note) {
-//        this.note = note;
-//    }
-//
-//    public String getAdmin_name() {
-//        return admin_name;
-//    }
-//
-//    public void setAdmin_name(String admin_name) {
-//        this.admin_name = admin_name;
-//    }
-//
-//    public String getCreated_timestamp() {
-//        return created_timestamp;
-//    }
-//
-//    public void setCreated_timestamp(String created_timestamp) {
-//        this.created_timestamp = created_timestamp;
-//    }
+
+    @ParameterizedTest
+    @ValueSource (ints = {0, 1, 132, 2329})
+     void setReportTo(int reportToID){
+        testDrill.setReportToID((reportToID));
+        Set<ConstraintViolation<Drill>> violations = validator.validate(testDrill);
+
+        for (ConstraintViolation<Drill> violation : violations) {
+            System.out.println(violation.getMessage());
+        }
+    }
+    @Test
+     void getReportTo(){
+        testDrill.getReportToID();
+        Set<ConstraintViolation<Drill>> violations = validator.validate(testDrill);
+
+        for (ConstraintViolation<Drill> violation : violations) {
+            System.out.println(violation.getMessage());
+        }
+    }
+
+
+    @ParameterizedTest
+    @ValueSource (strings = {""," ","what we're doing","Dodgeball"})
+    void setDescription(String description) {
+        testDrill.setDescription(description);
+        Set<ConstraintViolation<Drill>> violations = validator.validate(testDrill);
+
+        for (ConstraintViolation<Drill> violation : violations) {
+            System.out.println(violation.getMessage());
+        }
+    }
+
+
+
+    @Test
+     void getDescription() {
+        testDrill.getDescription();
+        Set<ConstraintViolation<Drill>> violations = validator.validate(testDrill);
+
+        for (ConstraintViolation<Drill> violation : violations) {
+            System.out.println(violation.getMessage());
+        }
+    }
+
+
+
+    @Test
+    void setParticipants() {
+        testDrill.setParticipants(participants);
+        Set<ConstraintViolation<Drill>> violations = validator.validate(testDrill);
+
+        for (ConstraintViolation<Drill> violation : violations) {
+            System.out.println(violation.getMessage());
+        }
+    }
+
+
+
+    @Test
+    void getParticipants() {
+        testDrill.getParticipants();
+        Set<ConstraintViolation<Drill>> violations = validator.validate(testDrill);
+
+        for (ConstraintViolation<Drill> violation : violations) {
+            System.out.println(violation.getMessage());
+        }
+    }
 
 }
